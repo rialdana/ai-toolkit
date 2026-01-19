@@ -28,6 +28,20 @@ Claude Code skills organized as plugins for the Ravn team.
 /plugin install project-management@ravn-plugins
 ```
 
+## Updating Plugins
+
+To get the latest version of installed plugins:
+
+```
+/plugin update apple-dev@ravn-plugins
+```
+
+Or update all:
+
+```
+/plugin marketplace update ravn-plugins
+```
+
 ## Team Recommendations
 
 | Team | Install |
@@ -44,7 +58,8 @@ Claude Code skills organized as plugins for the Ravn team.
 
 ### apple-dev
 - **swift-concurrency** - async/await, actors, Sendable, tasks
-- **liquid-glass** - Apple's Liquid Glass design (iOS 26+)
+- **swiftui-liquid-glass** - Apple's Liquid Glass design (iOS 26+)
+- **swiftui-performance-audit** - Audit SwiftUI runtime performance (MIT License, from Thomas Ricouard)
 - **app-icon-generator** - iOS/Android icon specs and guidelines
 
 ### ui-design

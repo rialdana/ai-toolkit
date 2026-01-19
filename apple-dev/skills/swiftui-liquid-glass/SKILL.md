@@ -1,5 +1,5 @@
 ---
-name: liquid-glass
+name: swiftui-liquid-glass
 description: Guide for adopting Apple's Liquid Glass design system in SwiftUI apps (iOS 26+, macOS Tahoe 26+). Covers glassEffect modifiers, GlassEffectContainer, morphing transitions, platform-specific patterns, and anti-patterns to avoid.
 license: MIT
 metadata:
