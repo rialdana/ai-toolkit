@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Mobile design patterns for touch interfaces and platform conventions. Extends generic design patterns with mobile-specific guidance.",
+  "references": [
+    {
+      "title": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/"
+    },
+    {
+      "title": "Material Design",
+      "url": "https://m3.material.io/"
+    }
+  ]
+}

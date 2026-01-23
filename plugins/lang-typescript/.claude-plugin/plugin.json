@@ -1,0 +1,6 @@
+{
+  "name": "lang-typescript",
+  "description": "TypeScript conventions: strict mode, no any, discriminated unions",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}

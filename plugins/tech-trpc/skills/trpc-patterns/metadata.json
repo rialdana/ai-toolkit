@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "tRPC patterns using Vertical Slice Architecture. 15+ rules covering feature organization, procedure design, schema validation, error handling, and cross-slice communication.",
+  "references": [
+    {
+      "title": "tRPC Documentation",
+      "url": "https://trpc.io/docs"
+    },
+    {
+      "title": "Vertical Slice Architecture",
+      "url": "https://www.jimmybogard.com/vertical-slice-architecture/"
+    }
+  ]
+}

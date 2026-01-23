@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Vitest-specific patterns extending generic testing rules. 8+ rules covering vi.mock, vi.fn, test hooks, and Vitest configuration.",
+  "references": [
+    {
+      "title": "Vitest Documentation",
+      "url": "https://vitest.dev/"
+    },
+    {
+      "title": "Vitest Mocking",
+      "url": "https://vitest.dev/guide/mocking.html"
+    }
+  ]
+}

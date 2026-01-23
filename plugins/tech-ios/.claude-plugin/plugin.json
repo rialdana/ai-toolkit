@@ -1,0 +1,6 @@
+{
+  "name": "tech-ios",
+  "description": "iOS/Swift patterns: SwiftUI, UIKit, concurrency, App Store guidelines",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}

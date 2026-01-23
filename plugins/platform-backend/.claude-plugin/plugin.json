@@ -1,0 +1,6 @@
+{
+  "name": "platform-backend",
+  "description": "General backend patterns: API design, services, error handling",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}

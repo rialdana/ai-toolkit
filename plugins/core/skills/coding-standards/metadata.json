@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Universal coding standards applicable to any language or framework. 25+ rules across 7 categories covering core principles (KISS, DRY), naming conventions, function design, type safety, error handling, and performance mindset.",
+  "references": [
+    {
+      "title": "A Philosophy of Software Design",
+      "url": "https://www.amazon.com/Philosophy-Software-Design-John-Ousterhout/dp/1732102201"
+    },
+    {
+      "title": "Clean Code",
+      "url": "https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"
+    },
+    {
+      "title": "John Carmack on Inlined Code",
+      "url": "http://number-none.com/blow/blog/programming/2014/09/26/carmack-on-inlined-code.html"
+    }
+  ]
+}

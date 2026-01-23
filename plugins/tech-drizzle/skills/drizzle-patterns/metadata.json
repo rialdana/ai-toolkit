@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Drizzle ORM-specific patterns extending generic database rules. 15+ rules covering relational queries, schema organization, migrations with drizzle-kit, and performance patterns.",
+  "references": [
+    {
+      "title": "Drizzle ORM Documentation",
+      "url": "https://orm.drizzle.team/"
+    },
+    {
+      "title": "Drizzle Relational Queries",
+      "url": "https://orm.drizzle.team/docs/rqb"
+    }
+  ]
+}

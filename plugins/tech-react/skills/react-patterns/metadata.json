@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "React-specific patterns extending generic frontend rules. 15+ rules covering hooks, effects, component patterns, and React-specific performance optimizations.",
+  "references": [
+    {
+      "title": "React Documentation",
+      "url": "https://react.dev/"
+    },
+    {
+      "title": "You Might Not Need an Effect",
+      "url": "https://react.dev/learn/you-might-not-need-an-effect"
+    }
+  ]
+}

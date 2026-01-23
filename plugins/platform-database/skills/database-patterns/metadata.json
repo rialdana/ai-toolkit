@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Generic database patterns applicable to any ORM or query builder. 15+ rules covering query optimization, migrations, indexing, and transactions. Framework-agnostic guidance that specific plugins (drizzle, prisma) extend.",
+  "references": [
+    {
+      "title": "Use The Index, Luke",
+      "url": "https://use-the-index-luke.com/"
+    },
+    {
+      "title": "SQL Performance Explained",
+      "url": "https://sql-performance-explained.com/"
+    }
+  ]
+}
