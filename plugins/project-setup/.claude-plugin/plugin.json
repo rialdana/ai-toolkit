@@ -1,0 +1,6 @@
+{
+  "name": "project-setup",
+  "description": "Interactive project setup wizards. Generate CLAUDE.md files, configure skills, and bootstrap agent configuration.",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}

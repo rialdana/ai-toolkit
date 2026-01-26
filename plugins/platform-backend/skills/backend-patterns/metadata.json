@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Generic backend patterns applicable to any API framework. 15+ rules covering API design, error handling, security, and input validation. Framework-agnostic guidance that specific plugins (trpc) extend.",
+  "references": [
+    {
+      "title": "API Design Patterns",
+      "url": "https://www.manning.com/books/api-design-patterns"
+    },
+    {
+      "title": "OWASP Top 10",
+      "url": "https://owasp.org/www-project-top-ten/"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "iOS-specific patterns for Swift and SwiftUI development. Extends generic mobile patterns with platform-specific guidance.",
+  "references": [
+    {
+      "title": "Apple Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/"
+    }
+  ]
+}

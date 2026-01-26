@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2025-01",
+  "abstract": "Android-specific patterns for Kotlin and Jetpack Compose development. Extends generic mobile patterns with platform-specific guidance.",
+  "references": [
+    {
+      "title": "Android Developer Guides",
+      "url": "https://developer.android.com/guide"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# Project Context
+
+## Identity
+<!-- One sentence: what this project is and who it's for -->
+
+## Tech Stack
+- Frontend:
+- Backend:
+- Database:
+- Styling:
+
+## Tooling
+- MUST use pnpm (NEVER npm or yarn)
+- MUST use biome for formatting
+
+## Commands
+- `pnpm dev` - start dev server
+- `pnpm build` - production build
+- `pnpm test` - run tests
+
+## Guardrails
+<!-- Critical security/compliance rules using MUST/NEVER/ALWAYS -->
+
+## More Information
+<!-- Pointers to docs/ and skills -->
+- Run `/skills` to see available patterns and workflows

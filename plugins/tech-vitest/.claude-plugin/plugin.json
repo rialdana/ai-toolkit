@@ -1,0 +1,6 @@
+{
+  "name": "tech-vitest",
+  "description": "Vitest patterns: mocking, hooks, configuration",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "tech-android",
+  "description": "Android/Kotlin patterns: Compose, architecture, Play Store guidelines",
+  "version": "1.0.0",
+  "author": { "name": "Ravn" }
+}
