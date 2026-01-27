@@ -1,0 +1,6 @@
+{
+  "name": "platform-cli",
+  "description": "CLI design and implementation patterns for building command-line tools",
+  "version": "1.0.0",
+  "author": "Ravn Engineering"
+}
