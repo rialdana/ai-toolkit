@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "author": "Ravn Engineering",
+  "date": "2026-01",
+  "abstract": "Swift Concurrency patterns for async/await, actors, tasks, and Sendable. Covers structured concurrency, isolation domains, memory management, testing, and migration from legacy patterns.",
+  "references": [
+    {
+      "title": "Swift Concurrency Documentation",
+      "url": "https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/"
+    },
+    {
+      "title": "Migrating to Swift 6",
+      "url": "https://www.swift.org/migration/documentation/swift-6-concurrency-migration-guide/"
+    },
+    {
+      "title": "SE-0306: Actors",
+      "url": "https://github.com/apple/swift-evolution/blob/main/proposals/0306-actors.md"
+    },
+    {
+      "title": "SE-0302: Sendable and @Sendable closures",
+      "url": "https://github.com/apple/swift-evolution/blob/main/proposals/0302-concurrent-value-and-concurrent-closures.md"
+    }
+  ]
+}
