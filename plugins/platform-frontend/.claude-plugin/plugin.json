@@ -1,6 +1,0 @@
-{
-  "name": "platform-frontend",
-  "description": "General frontend patterns: state management, components, data fetching",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}

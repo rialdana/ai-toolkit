@@ -1,6 +1,0 @@
-{
-  "name": "tech-trpc",
-  "description": "tRPC: procedures, routers, error handling, Vertical Slice Architecture",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}

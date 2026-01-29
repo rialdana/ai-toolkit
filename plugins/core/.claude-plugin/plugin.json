@@ -1,6 +1,0 @@
-{
-  "name": "core",
-  "description": "Universal programming principles: KISS, DRY, clean code, code review",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}
