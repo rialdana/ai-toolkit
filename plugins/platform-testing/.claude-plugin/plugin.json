@@ -1,6 +1,0 @@
-{
-  "name": "platform-testing",
-  "description": "General testing patterns: philosophy, structure, mocking, coverage",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}

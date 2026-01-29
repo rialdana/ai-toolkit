@@ -1,6 +1,0 @@
-{
-  "name": "platform-database",
-  "description": "General database patterns: queries, migrations, performance",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}

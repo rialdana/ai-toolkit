@@ -1,7 +1,0 @@
-{
-  "version": "1.0.0",
-  "author": "Ravn Engineering",
-  "date": "2025-01",
-  "abstract": "Generic mobile patterns applicable to any platform. Covers navigation, gestures, offline handling, and performance. Framework-agnostic guidance that specific plugins (ios, android, react-native) extend.",
-  "references": []
-}

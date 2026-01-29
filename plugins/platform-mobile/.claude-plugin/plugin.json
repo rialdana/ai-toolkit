@@ -1,6 +1,0 @@
-{
-  "name": "platform-mobile",
-  "description": "General mobile patterns: navigation, gestures, offline, performance",
-  "version": "1.0.0",
-  "author": { "name": "Ravn" }
-}
