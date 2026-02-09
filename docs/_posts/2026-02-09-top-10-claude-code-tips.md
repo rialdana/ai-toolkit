@@ -2,6 +2,8 @@
 layout: post
 title: "Top 10 Claude Code Tips for Newcomers"
 date: 2026-02-09
+author: "Pedro Guimarães"
+author_github: "0x7067"
 excerpt: "The most impactful things you can do to turn Claude from a generic assistant into one that follows your coding standards, patterns, and preferences every single session."
 ---
 
