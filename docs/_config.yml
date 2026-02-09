@@ -1,0 +1,23 @@
+title: Ravn AI Toolkit
+description: Modular AI skills for LLM-assisted development
+url: "https://ravnhq.github.io"
+baseurl: "/ai-toolkit"
+
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:title/
+
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - plugins
+  - skills
+  - apple-dev
+  - notes.md

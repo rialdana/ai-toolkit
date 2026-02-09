@@ -1,0 +1,26 @@
+---
+layout: default
+title: Blog
+---
+
+<div class="container">
+  <section class="hero">
+    <h1>AI Toolkit<span>.</span></h1>
+    <p>Thoughts on LLM-assisted development, Claude Code skills, and building better AI workflows.</p>
+  </section>
+
+  <div class="section-label">Latest Posts</div>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+    <li class="post-item">
+      <div class="post-meta">{{ post.date | date: "%B %d, %Y" }}</div>
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      {% if post.excerpt %}
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+      {% endif %}
+      <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
