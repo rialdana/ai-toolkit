@@ -28,3 +28,5 @@ excerpt: "The most impactful things you can do to turn Claude from a generic ass
 ---
 
 Got a skill idea, a useful CLAUDE.md rule, or a hook that saved you time? Contribute it to our shared repo at [github.com/ravnhq/ai-toolkit](https://github.com/ravnhq/ai-toolkit). Any contribution is welcome — whether it's a full skill, a bug fix, or just a better prompt. The more we share, the better Claude works for all of us.
+
+**P.S.** You don't have to set all of this up by hand — Claude itself can help. Ask it to create a CLAUDE.md, write a hook, scaffold a skill, or configure your rules directory. Most of the tips above are one prompt away.
