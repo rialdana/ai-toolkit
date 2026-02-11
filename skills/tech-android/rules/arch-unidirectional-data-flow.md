@@ -33,7 +33,7 @@ fun ProfileScreen(viewModel: ProfileViewModel) {
 }
 ```
 
-**Correct (unidirectional data flow):**
+**Correct (unidirectional data flow — direct methods):**
 
 ```kotlin
 // Good - sealed UI state, single source of truth
@@ -76,6 +76,66 @@ fun ProfileScreen(viewModel: ProfileViewModel) {
     )
 }
 ```
+
+**Correct (unidirectional data flow — sealed events / MVI-style):**
+
+```kotlin
+// Good - sealed event interface provides a single entry point for all UI actions
+sealed interface ProfileEvent {
+    data class OnNameChanged(val name: String) : ProfileEvent
+    data object OnSaveClicked : ProfileEvent
+}
+
+data class ProfileUiState(
+    val name: String = "",
+    val isLoading: Boolean = false,
+    val error: String? = null
+)
+
+class ProfileViewModel(
+    private val profileRepository: ProfileRepository
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(ProfileUiState())
+    val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
+
+    fun handleEvent(event: ProfileEvent) {      // Single entry point
+        when (event) {
+            is ProfileEvent.OnNameChanged -> {
+                _uiState.update { it.copy(name = event.name) }
+            }
+            is ProfileEvent.OnSaveClicked -> {
+                viewModelScope.launch {
+                    _uiState.update { it.copy(isLoading = true) }
+                    profileRepository.save(_uiState.value.name)
+                        .onSuccess { _uiState.update { it.copy(isLoading = false) } }
+                        .onFailure { e ->
+                            _uiState.update { it.copy(isLoading = false, error = e.message) }
+                        }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileScreen(viewModel: ProfileViewModel) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    TextField(
+        value = uiState.name,
+        onValueChange = { viewModel.handleEvent(ProfileEvent.OnNameChanged(it)) }
+    )
+
+    Button(onClick = { viewModel.handleEvent(ProfileEvent.OnSaveClicked) }) {
+        Text("Save")
+    }
+}
+```
+
+> **When to use each approach:**
+> - **Direct methods** — simpler screens with few actions; easier to read and navigate.
+> - **Sealed events** — complex screens with many actions, or when you need to log/intercept all user interactions through a single entry point (analytics, debugging).
 
 **Why it matters:**
 - Single source of truth prevents state inconsistencies
