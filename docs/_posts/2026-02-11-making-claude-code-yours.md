@@ -27,7 +27,7 @@ Claude generates a shell script and wires it into your settings automatically. I
 
 Here's [mine](https://gist.github.com/0x7067/dde056c2ee56353a4c889a4ab3d111e2):
 
-![Custom statusline showing model, project, branch, context usage, and file changes](/assets/images/posts/statusline.png)
+![Custom statusline showing model, project, branch, context usage, and file changes]({{ site.baseurl }}/assets/images/posts/statusline.png)
 
 If you want something more complex, you can check projects such as [CCometixLine](https://github.com/Haleclipse/CCometixLine) and [ccstatusline](https://github.com/sirmalloc/ccstatusline).
 
