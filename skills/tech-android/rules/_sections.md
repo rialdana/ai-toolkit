@@ -23,7 +23,7 @@ The section ID (in parentheses) is the filename prefix used to group rules.
 ## 4. Compose (compose)
 
 **Impact:** HIGH
-**Description:** Jetpack Compose patterns including state hoisting, recomposition stability, and lazy list performance.
+**Description:** Jetpack Compose patterns including state hoisting, remember/rememberSaveable, side effects, animations, theming, recomposition stability, and lazy list performance.
 
 ## 5. Persistence (room)
 
@@ -49,3 +49,8 @@ The section ID (in parentheses) is the filename prefix used to group rules.
 
 **Impact:** HIGH
 **Description:** Compose UI testing via semantics, testable coroutine code, and Flow testing with Turbine.
+
+## 10. Permissions (perm)
+
+**Impact:** HIGH
+**Description:** Runtime permission requests, rationale handling, and permission state management in Compose.
