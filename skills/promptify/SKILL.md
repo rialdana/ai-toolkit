@@ -47,7 +47,15 @@ Apply the rules in `rules/` to sharpen the prompt:
 
 ### 4. Output
 
-Provide only the final prompt as markdown, without additional commentary or explanation.
+Present the final prompt to the user as a markdown block, clearly labeled. Do not add commentary beyond the prompt itself.
+
+### 5. Plan
+
+After presenting the prompt, enter plan mode and create an implementation plan that treats the generated prompt as the requirements specification. The plan should include:
+
+- Concrete implementation steps
+- Files to create or modify
+- Verification criteria
 
 ## Writing Guidelines
 
