@@ -148,6 +148,15 @@
       "status": "ready"
     },
     {
+      "name": "promptify",
+      "source": "./skills/promptify",
+      "description": "Transform user requests into detailed, precise prompts for AI models.",
+      "category": "agent",
+      "tags": ["agent", "prompt-engineering", "clarity", "specification"],
+      "status": "ready",
+      "rules": 6
+    },
+    {
       "name": "agent-add-rule",
       "source": "./skills/agent-add-rule",
       "description": "Add rules, conventions, or instructions to the project's agent configuration.",
