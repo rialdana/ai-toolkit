@@ -49,13 +49,9 @@ Apply the rules in `rules/` to sharpen the prompt:
 
 Present the final prompt to the user as a markdown block, clearly labeled. Do not add commentary beyond the prompt itself.
 
-### 5. Plan
+### 5. Execute
 
-After presenting the prompt, enter plan mode and create an implementation plan that treats the generated prompt as the requirements specification. The plan should include:
-
-- Concrete implementation steps
-- Files to create or modify
-- Verification criteria
+After presenting the prompt, treat it as your new instruction and proceed based on the current conversation context. Use your normal judgement to decide the best next action — plan complex tasks, implement simple ones directly, or ask clarifying questions if needed.
 
 ## Writing Guidelines
 
