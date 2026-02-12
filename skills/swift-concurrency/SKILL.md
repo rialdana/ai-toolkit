@@ -1,6 +1,9 @@
 ---
 name: swift-concurrency
-description: "Swift Concurrency best practices and patterns for async/await, actors, tasks, and Sendable conformance. Use when: (1) writing async/await code, (2) implementing actors or isolation domains, (3) working with structured concurrency or task groups, (4) ensuring Sendable conformance and data race safety, (5) migrating to strict concurrency checking, (6) debugging or testing async code, (7) managing memory in async contexts."
+description: "Swift Concurrency patterns — async/await, actors, tasks, Sendable conformance. Use when writing async/await code, implementing actors, working with structured concurrency, or ensuring data race safety."
+category: framework
+tags: [swift, concurrency, async, actors, ios]
+status: ready
 ---
 
 # Swift Concurrency Patterns

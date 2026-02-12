@@ -1,6 +1,10 @@
 ---
 name: lang-typescript
-description: "TypeScript language patterns and type safety rules. Extends core-coding-standards with TypeScript-specific rules. Use when writing TypeScript code."
+description: "TypeScript language patterns and type safety rules — strict mode, no any, discriminated unions. Use when writing TypeScript code, reviewing types, or enforcing type safety."
+category: universal
+extends: core-coding-standards
+tags: [typescript, type-safety, language]
+status: ready
 ---
 
 # Principles

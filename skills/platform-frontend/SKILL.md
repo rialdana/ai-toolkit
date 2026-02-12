@@ -1,6 +1,10 @@
 ---
 name: platform-frontend
-description: "Framework-agnostic frontend architecture patterns. Extends core-coding-standards with UI-specific rules. Use when building any web frontend."
+description: "Framework-agnostic frontend architecture — state management, components, data fetching. Use when building any web frontend, choosing state patterns, or structuring UI code."
+category: platform
+extends: core-coding-standards
+tags: [frontend, ui, components, state]
+status: ready
 ---
 
 # Principles

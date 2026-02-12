@@ -1,6 +1,10 @@
 ---
 name: platform-backend
-description: "Server-side architecture and security patterns. Extends core-coding-standards with API, error handling, and security rules. Use when building APIs or server logic."
+description: "Server-side architecture and security — API design, error handling, validation, logging. Use when building APIs, server logic, or reviewing backend security."
+category: platform
+extends: core-coding-standards
+tags: [backend, api, security, server]
+status: ready
 ---
 
 # Principles

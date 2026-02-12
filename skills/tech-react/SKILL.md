@@ -1,6 +1,10 @@
 ---
 name: tech-react
-description: "React-specific component, hook, and rendering patterns. Extends platform-frontend with React rules. Use when writing React components or hooks."
+description: "React-specific component, hook, and rendering patterns. Use when writing React components, hooks, JSX, or optimizing React performance."
+category: framework
+extends: platform-frontend
+tags: [react, hooks, components, jsx, web]
+status: ready
 ---
 
 # Rules

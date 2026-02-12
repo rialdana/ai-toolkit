@@ -1,6 +1,9 @@
 ---
 name: design-accessibility
-description: "WCAG and ARIA best practices for web UIs. Extends platform-frontend with accessibility-specific rules. Use when building any user-facing interface."
+description: "WCAG AA and ARIA best practices — screen readers, keyboard navigation, focus management. Use when building any user-facing interface or reviewing accessibility compliance."
+category: design
+tags: [accessibility, wcag, aria, a11y]
+status: ready
 ---
 
 # Principles

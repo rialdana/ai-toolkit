@@ -7,6 +7,9 @@ description: >
   refactoring a bloated CLAUDE.md, or adding progressive disclosure to an existing repo.
   Triggers on: '/agent-init-deep', 'setup progressive disclosure', 'refactor claude.md',
   'split claude.md', 'claude.md is too big'.
+category: agent
+tags: [agent, claude-md, progressive-disclosure, setup]
+status: ready
 ---
 
 # Init Deep — Progressive Disclosure CLAUDE.md

@@ -19,8 +19,3 @@ The section ID (in parentheses) is the filename prefix used to group rules.
 
 **Impact:** MEDIUM
 **Description:** Layout patterns using Flexbox and Grid. Container widths, spacing, and component sizing.
-
-## 4. Typography (typography)
-
-**Impact:** LOW
-**Description:** Typography scale, font weights, and text styling with Tailwind utilities.

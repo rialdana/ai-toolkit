@@ -1,6 +1,9 @@
 ---
 name: design-frontend
-description: "Visual design system patterns for web UIs — layout, spacing, responsive design, and design tokens. Extends platform-frontend with design-specific rules. Use when implementing visual designs."
+description: "Visual design system patterns for web UIs — layout, responsive, Tailwind tokens. Use when implementing visual designs, working with CSS/Tailwind, or building responsive layouts."
+category: design
+tags: [design, css, tailwind, responsive, web]
+status: ready
 ---
 
 # Rules

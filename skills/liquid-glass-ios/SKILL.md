@@ -1,6 +1,9 @@
 ---
 name: liquid-glass-ios
-description: "Apple's Liquid Glass design system for iOS 26+ and iPadOS 26+. Use when: (1) building iOS 26+ UI with glassEffect, (2) implementing GlassEffectContainer for multiple elements, (3) working with glass morphing transitions, (4) integrating glass effects in navigation layers, (5) ensuring glass effect accessibility, (6) migrating from UIKit to SwiftUI glass APIs."
+description: "Apple's Liquid Glass design system for iOS 26+ and iPadOS 26+. Use when building iOS 26+ UI with glassEffect, implementing GlassEffectContainer, working with glass morphing transitions, or migrating from UIKit to SwiftUI glass APIs."
+category: design
+tags: [ios, liquid-glass, apple, swiftui, design]
+status: ready
 ---
 
 # Liquid Glass Design for iOS

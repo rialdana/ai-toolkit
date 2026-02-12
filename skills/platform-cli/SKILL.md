@@ -1,6 +1,10 @@
 ---
 name: platform-cli
-description: "Design and implementation patterns for building command-line tools with modern UX conventions. Use when: (1) designing a new CLI tool, (2) reviewing CLI UX and behavior, (3) defining commands, flags, or help text, (4) implementing error handling or signal handling, (5) planning CLI distribution."
+description: "Design and implementation patterns for building command-line tools with modern UX. Use when designing a CLI, reviewing CLI UX, defining commands and flags, or implementing error handling and signal handling."
+category: platform
+extends: core-coding-standards
+tags: [cli, terminal, commands, flags]
+status: ready
 ---
 
 # CLI Development Patterns

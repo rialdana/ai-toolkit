@@ -1,6 +1,10 @@
 ---
 name: platform-database
-description: "SQL database design, query optimization, and migration safety. Extends core-coding-standards with database-specific rules. Use when writing queries, schemas, or migrations."
+description: "SQL database design, query optimization, and migration safety. Use when writing queries, designing schemas, or planning database migrations."
+category: platform
+extends: core-coding-standards
+tags: [database, sql, queries, migrations, performance]
+status: ready
 ---
 
 # Principles

@@ -24,12 +24,10 @@ Skills use a **layered architecture**: generic platform rules + specific framewo
 
 | Layer | Generic | Specific |
 |-------|---------|----------|
-| Frontend | `platform-frontend` | `tech-react`, `tech-tanstack-router`, `tech-tanstack-form` |
+| Frontend | `platform-frontend` | `tech-react` |
 | Backend | `platform-backend` | `tech-trpc` |
-| Database | `platform-database` | `tech-drizzle`, `tech-prisma` |
-| Mobile | `platform-mobile` | `tech-ios`, `tech-android`, `tech-react-native` |
+| Database | `platform-database` | `tech-drizzle` |
 | Testing | `platform-testing` | `tech-vitest` |
-| Design | `design` | `design-frontend`, `design-mobile` |
 
 ---
 
@@ -44,42 +42,31 @@ Skills use a **layered architecture**: generic platform rules + specific framewo
 
 ### Platform Layers (Generic)
 
-| Skill | Description | Rules | Status |
-|-------|-------------|-------|--------|
-| `platform-frontend` | State management, components, data fetching | 6 | **Ready** |
-| `platform-backend` | API design, services, error handling | 13 | **Ready** |
-| `platform-database` | Queries, migrations, performance | 19 | **Ready** |
-| `platform-testing` | Test philosophy, structure, mocking | 3 | **Ready** |
-| `platform-mobile` | Navigation, gestures, offline, performance | — | Scaffold |
+| Skill | Description | Rules |
+|-------|-------------|-------|
+| `platform-frontend` | State management, components, data fetching | 6 |
+| `platform-backend` | API design, services, error handling | 13 |
+| `platform-database` | Queries, migrations, performance | 17 |
+| `platform-testing` | Test philosophy, structure, mocking | 3 |
+| `platform-cli` | CLI design, commands, flags, modern UX | — |
 
-### Frameworks (Web)
+### Frameworks
 
-| Skill | Extends | Description | Rules | Status |
-|-------|---------|-------------|-------|--------|
-| `tech-react` | `platform-frontend` | Components, hooks, state, performance | 8 | **Ready** |
-| `tech-tanstack-router` | `platform-frontend` | File-based routing, loaders, type-safe nav | — | Scaffold |
-| `tech-tanstack-form` | `platform-frontend` | Form state, validation, field arrays | — | Scaffold |
-| `tech-trpc` | `platform-backend` | Procedures, routers, Vertical Slice Architecture | 8 | **Ready** |
-| `tech-drizzle` | `platform-database` | Relational queries, schema, migrations | 9 | **Ready** |
-| `tech-prisma` | `platform-database` | Schema, queries, relations, migrations | — | Scaffold |
-| `tech-vitest` | `platform-testing` | vi.mock, vi.fn, fake timers | 7 | **Ready** |
-
-### Frameworks (Mobile)
-
-| Skill | Extends | Description | Rules | Status |
-|-------|---------|-------------|-------|--------|
-| `tech-ios` | `platform-mobile` | Swift/SwiftUI, concurrency, App Store | — | Scaffold |
-| `tech-android` | `platform-mobile` | Kotlin/Compose, architecture, Play Store | — | Scaffold |
-| `tech-react-native` | `platform-mobile` | Expo, navigation, native modules | — | Scaffold |
+| Skill | Extends | Description | Rules |
+|-------|---------|-------------|-------|
+| `tech-react` | `platform-frontend` | Components, hooks, state, performance | 8 |
+| `tech-trpc` | `platform-backend` | Procedures, routers, Vertical Slice Architecture | 8 |
+| `tech-drizzle` | `platform-database` | Relational queries, schema, migrations | 9 |
+| `tech-vitest` | `platform-testing` | vi.mock, vi.fn, fake timers | 7 |
+| `swift-concurrency` | — | async/await, actors, tasks, Sendable | — |
 
 ### Design & UX
 
-| Skill | Extends | Description | Rules | Status |
-|-------|---------|-------------|-------|--------|
-| `design` | — | Hierarchy, spacing, color, typography | — | Scaffold |
-| `design-frontend` | `design` | Layouts, responsive, Tailwind tokens | 7 | **Ready** |
-| `design-mobile` | `design` | Touch targets, gestures, platform conventions | — | Scaffold |
-| `design-accessibility` | — | WCAG AA, screen readers, keyboard nav | 4 | **Ready** |
+| Skill | Description | Rules |
+|-------|-------------|-------|
+| `design-frontend` | Layouts, responsive, Tailwind tokens | 7 |
+| `design-accessibility` | WCAG AA, screen readers, keyboard nav | 4 |
+| `liquid-glass-ios` | Apple Liquid Glass for iOS 26+ | — |
 
 ### Agent Workflow
 
@@ -91,7 +78,7 @@ These skills configure the AI agent itself (CLAUDE.md, docs/agents/, skills). Th
 | `agent-add-rule` | Classify and place new rules in the right config location | **Ready** |
 | `agent-skill-creator` | Guide for creating effective skills with scripts, references, and assets | **Ready** |
 
-**Status key:** Scaffold (sections defined) → In Progress → **Ready**
+Scaffold skills (in development) are in `skills/_drafts/`. See `marketplace.json` for the full catalog including drafts.
 
 ---
 
@@ -100,11 +87,9 @@ These skills configure the AI agent itself (CLAUDE.md, docs/agents/, skills). Th
 | Project Type | Skills |
 |--------------|--------|
 | React web app | `core-coding-standards`, `lang-typescript`, `platform-frontend`, `tech-react`, `design-accessibility` |
-| TanStack Start + tRPC | `core-coding-standards`, `lang-typescript`, `platform-frontend`, `tech-react`, `tech-tanstack-router`, `tech-tanstack-form`, `tech-trpc`, `tech-drizzle` |
-| Next.js + Prisma | `core-coding-standards`, `lang-typescript`, `platform-frontend`, `tech-react`, `tech-prisma` |
-| iOS app | `core-coding-standards`, `platform-mobile`, `tech-ios`, `design-mobile`, `design-accessibility` |
-| Android app | `core-coding-standards`, `platform-mobile`, `tech-android`, `design-mobile`, `design-accessibility` |
-| React Native (Expo) | `core-coding-standards`, `lang-typescript`, `platform-mobile`, `tech-react`, `tech-react-native`, `design-mobile` |
+| TanStack Start + tRPC | `core-coding-standards`, `lang-typescript`, `platform-frontend`, `tech-react`, `tech-trpc`, `tech-drizzle` |
+| Next.js | `core-coding-standards`, `lang-typescript`, `platform-frontend`, `tech-react` |
+| iOS app | `core-coding-standards`, `swift-concurrency`, `liquid-glass-ios`, `design-accessibility` |
 | Node.js API | `core-coding-standards`, `lang-typescript`, `platform-backend`, `tech-trpc`, `tech-drizzle` |
 
 ---

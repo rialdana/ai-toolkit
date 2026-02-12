@@ -1,6 +1,9 @@
 ---
 name: core-coding-standards
-description: "Universal code quality rules. Extends nothing — this is the base skill every project should include. Use when writing or reviewing any code."
+description: "Universal code quality rules — KISS, DRY, clean code, code review. Base skill every project should include. Use when writing or reviewing any code."
+category: universal
+tags: [code-quality, review, fundamentals]
+status: ready
 ---
 
 # Principles

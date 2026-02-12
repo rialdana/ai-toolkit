@@ -1,6 +1,10 @@
 ---
 name: platform-testing
-description: "Framework-agnostic testing principles. Extends core-coding-standards with test-specific patterns. Use when writing, reviewing, or debugging tests."
+description: "Framework-agnostic testing principles — test philosophy, structure, mocking boundaries. Use when writing, reviewing, or debugging tests."
+category: platform
+extends: core-coding-standards
+tags: [testing, mocking, test-design]
+status: ready
 ---
 
 # Principles

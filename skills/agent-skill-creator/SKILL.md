@@ -1,6 +1,9 @@
 ---
 name: agent-skill-creator
-description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
+description: "Guide for creating effective skills. Use when creating a new skill or updating an existing skill that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations."
+category: agent
+tags: [agent, skills, authoring, templates]
+status: ready
 license: Complete terms in LICENSE.txt
 ---
 

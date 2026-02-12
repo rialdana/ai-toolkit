@@ -6,6 +6,9 @@ description: >
   docs/agents/ files (topic-specific guidance), or a new skill (complex workflows).
   Triggers on: '/agent-add-rule', 'add a rule', 'add convention', 'new coding standard',
   'add instruction for claude', 'update claude.md with'.
+category: agent
+tags: [agent, rules, claude-md, configuration]
+status: ready
 ---
 
 # Add Rule — Place Agent Instructions Correctly
