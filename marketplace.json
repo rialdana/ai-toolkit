@@ -37,7 +37,7 @@
     {
       "name": "platform-backend",
       "source": "./skills/platform-backend",
-      "description": "Server-side architecture and security — API design, error handling, validation, logging.",
+      "description": "Server-side architecture and security — API design, error handling, validation, logging. Use when building APIs, server logic, or reviewing backend security.",
       "category": "platform",
       "tags": ["backend", "api", "security", "server"],
       "extends": "core-coding-standards",
@@ -52,7 +52,7 @@
       "tags": ["database", "sql", "queries", "migrations", "performance"],
       "extends": "core-coding-standards",
       "status": "ready",
-      "rules": 17
+      "rules": 19
     },
     {
       "name": "platform-testing",

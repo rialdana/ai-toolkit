@@ -1,6 +1,6 @@
 ---
 title: Domain-Specific Error Classes
-impact: MEDIUM-HIGH
+impact: HIGH
 tags: errors, debugging, api
 ---
 
