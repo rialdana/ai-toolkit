@@ -49,9 +49,12 @@ Apply the rules in `rules/` to sharpen the prompt:
 
 Present the final prompt to the user as a markdown block, clearly labeled. Do not add commentary beyond the prompt itself.
 
-### 5. Execute
+### 5. Deliver
 
-After presenting the prompt, treat it as your new instruction and proceed based on the current conversation context. Use your normal judgement to decide the best next action — plan complex tasks, implement simple ones directly, or ask clarifying questions if needed.
+After presenting the prompt, use `AskUserQuestion` to offer the user a choice:
+
+1. **Feed to Claude** — Treat the generated prompt as your new instruction and proceed based on the current conversation context. Use your normal judgement to decide the best next action — plan complex tasks, implement simple ones directly, or ask clarifying questions if needed.
+2. **Save as markdown** — Write the prompt to `/tmp/claude/promptify-<timestamp>.md` (where `<timestamp>` is epoch seconds) and open it in the user's `$EDITOR`. If `$EDITOR` is unset, ask the user which editor to use.
 
 ## Writing Guidelines
 
