@@ -3,8 +3,8 @@ name: agent-add-rule
 description: 'Add a new rule, convention, or instruction to the project''s agent configuration.
   Analyzes the rule and helps decide placement: root CLAUDE.md (universal rules),
   docs/agents/ files (topic-specific guidance), or a new skill (complex workflows).
-  Use when users say: ''/agent-add-rule'', ''add a rule'', ''add convention'', ''new coding
-  standard'', ''add instruction for claude'', ''update claude.md with''.
+  Use when users say: ''/agent-add-rule'', ''add a rule'', ''add convention'', ''new
+  coding standard'', ''add instruction for claude'', ''update claude.md with''.
 
   '
 metadata:
@@ -15,6 +15,7 @@ metadata:
   - claude-md
   - configuration
   status: ready
+  version: 1
 ---
 
 # Add Rule — Place Agent Instructions Correctly
@@ -198,3 +199,39 @@ Expected behavior: Do not prioritize `agent-add-rule`; use an implementation-foc
 - Error: Result lacks concrete, actionable detail.
 - Cause: Task input omitted context, constraints, or target format.
 - Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.
+
+## Project Overrides
+
+Before applying rules from this skill, check if `.claude/overrides/agent-add-rule.md` exists.
+
+- **If it does not exist**: Create it from the template below, then inform the user.
+- **If it exists**: Read it and apply its instructions over the defaults in this skill.
+  Override file instructions take priority over upstream rules.
+
+### Override Template
+
+When creating the override file, use this content:
+
+    # Agent Add Rule — Project Overrides
+    #
+    # This file customizes the upstream agent-add-rule skill for this project.
+    # Edit freely — this file is never overwritten by skill updates.
+    #
+    # ## How to use
+    # - **Disable a rule**: "Ignore the <rule-name> rule"
+    # - **Modify a rule**: "For <rule-name>, instead do <your preference>"
+    # - **Add a rule**: Write your project-specific rule directly
+    #
+    # Leave sections empty or delete them if you have no overrides.
+
+    ## Disabled Rules
+
+    (none)
+
+    ## Modified Rules
+
+    (none)
+
+    ## Additional Project Rules
+
+    (none)

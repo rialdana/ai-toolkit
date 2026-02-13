@@ -16,6 +16,7 @@ metadata:
   - progressive-disclosure
   - setup
   status: ready
+  version: 1
 ---
 
 # Init Deep — Progressive Disclosure CLAUDE.md
@@ -218,3 +219,39 @@ Expected behavior: Do not prioritize `agent-init-deep`; choose a more relevant s
 - Error: Result lacks concrete, actionable detail.
 - Cause: Task input omitted context, constraints, or target format.
 - Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.
+
+## Project Overrides
+
+Before applying rules from this skill, check if `.claude/overrides/agent-init-deep.md` exists.
+
+- **If it does not exist**: Create it from the template below, then inform the user.
+- **If it exists**: Read it and apply its instructions over the defaults in this skill.
+  Override file instructions take priority over upstream rules.
+
+### Override Template
+
+When creating the override file, use this content:
+
+    # Agent Init Deep — Project Overrides
+    #
+    # This file customizes the upstream agent-init-deep skill for this project.
+    # Edit freely — this file is never overwritten by skill updates.
+    #
+    # ## How to use
+    # - **Disable a rule**: "Ignore the <rule-name> rule"
+    # - **Modify a rule**: "For <rule-name>, instead do <your preference>"
+    # - **Add a rule**: Write your project-specific rule directly
+    #
+    # Leave sections empty or delete them if you have no overrides.
+
+    ## Disabled Rules
+
+    (none)
+
+    ## Modified Rules
+
+    (none)
+
+    ## Additional Project Rules
+
+    (none)
