@@ -160,6 +160,18 @@ Classification: ESLint already enforces this → **Not needed**
 
 Response: "ESLint already enforces this via the `prefer-const` rule. Adding it to agent instructions would cost tokens without benefit. Skip?"
 
+### Positive Trigger
+
+User: "Add a new convention that API responses must include a request ID and put it in the right agent config location."
+
+Expected behavior: Use `agent-add-rule` guidance to classify placement, confirm with the user, and apply the rule in the appropriate location.
+
+### Non-Trigger
+
+User: "Implement a feature flag system for staged rollouts in our backend service."
+
+Expected behavior: Do not prioritize `agent-add-rule`; use an implementation-focused skill/workflow instead.
+
 ## Principles
 
 - **Challenge before adding**: Every rule costs tokens. Ask "does this justify its token cost?"

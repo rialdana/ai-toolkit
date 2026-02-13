@@ -21,7 +21,7 @@ Transform user requests into detailed, precise prompts optimised for AI model co
 
 Rewrite the user's request as a clear, specific, and complete prompt that guides an AI model to produce the desired output without ambiguity. Treat the output as specification language, not casual natural language.
 
-## Process
+## Workflow
 
 ### 1. Analyze
 

@@ -138,10 +138,22 @@ Brief explanation of why this matters.
 
 ---
 
+## Skill Quality Checks
+
+```bash
+ruby scripts/skills_audit.rb
+ruby scripts/skills_harness.rb
+```
+
+These checks enforce schema, link integrity, trigger examples, troubleshooting structure, and size/performance guardrails.
+
+---
+
 ## Contributing
 
 1. Pick a skill from the tables above
 2. Create or edit `skills/[name]/` following the Vercel pattern structure
 3. Add rules following the rule file format above
-4. Update status in this README
-5. Submit PR
+4. Run `ruby scripts/skills_audit.rb` and `ruby scripts/skills_harness.rb`
+5. Update status in this README
+6. Submit PR

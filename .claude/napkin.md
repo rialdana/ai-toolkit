@@ -6,6 +6,7 @@
 | 2026-02-13 | self | Tried running skill validator script directly; failed because `yaml` module is missing in this environment | Mirror validation logic with Ruby `YAML` for local audits when Python deps are unavailable |
 | 2026-02-13 | self | Broke shell quoting while generating multiline file content with `ruby -e` | Prefer escaped `\\n` one-liner strings for reliable shell-safe file writes |
 | 2026-02-13 | self | Local link checks flagged intentionally illustrative markdown links in sample code blocks | Use inline code filenames for illustrative docs in templates to avoid false broken-link signals |
+| 2026-02-13 | self | Trigger harness regex used `$` in multiline mode and matched end-of-line too early | Use lookahead with `\\z` for section boundaries in multiline markdown parsing |
 
 ## User Preferences
 -
@@ -17,6 +18,7 @@
 - Batch edit all `skills/**/SKILL.md` with a single scripted pass to keep schema consistent.
 - Generate reusable, skill-specific examples/troubleshooting blocks with a script to close repo-wide quality gaps quickly.
 - Add a short 3-step workflow section when skills lack explicit execution steps.
+- Keep harness section extraction regex anchored with lookaheads to avoid empty captures.
 
 ## Patterns That Do Not Work
 -

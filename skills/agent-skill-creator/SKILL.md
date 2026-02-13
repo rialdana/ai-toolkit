@@ -209,7 +209,9 @@ Claude reads REDLINING.md or OOXML.md only when the user needs those features.
 - **Avoid deeply nested references** - Keep references one level deep from SKILL.md. All reference files should link directly from SKILL.md.
 - **Structure longer reference files** - For files longer than 100 lines, include a table of contents at the top so Claude can see the full scope when previewing.
 
-## Skill Creation Process
+## Workflow
+
+### Skill Creation Process
 
 Skill creation involves these steps:
 
