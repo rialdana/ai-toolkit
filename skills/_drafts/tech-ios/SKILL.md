@@ -1,6 +1,11 @@
 ---
 name: tech-ios
-description: "iOS and Swift development patterns. Extends platform-mobile with iOS-specific rules. See swift-concurrency skill for async/await patterns and liquid-glass-ios skill for iOS 26+ UI design. Use for general iOS development guidance."
+description: Draft scaffold; incomplete and not for normal use. iOS and Swift development
+  patterns. Extends platform-mobile with iOS-specific rules. See swift-concurrency
+  skill for async/await patterns and liquid-glass-ios skill for iOS 26+ UI design.
+  Use for general iOS development guidance.
+metadata:
+  status: draft
 ---
 
 # iOS Development Patterns

@@ -1,14 +1,20 @@
 ---
 name: agent-add-rule
-description: >
-  Add a new rule, convention, or instruction to the project's agent configuration.
+description: 'Add a new rule, convention, or instruction to the project''s agent configuration.
   Analyzes the rule and helps decide placement: root CLAUDE.md (universal rules),
   docs/agents/ files (topic-specific guidance), or a new skill (complex workflows).
-  Triggers on: '/agent-add-rule', 'add a rule', 'add convention', 'new coding standard',
-  'add instruction for claude', 'update claude.md with'.
-category: agent
-tags: [agent, rules, claude-md, configuration]
-status: ready
+  Use when users say: ''/agent-add-rule'', ''add a rule'', ''add convention'', ''new coding
+  standard'', ''add instruction for claude'', ''update claude.md with''.
+
+  '
+metadata:
+  category: agent
+  tags:
+  - agent
+  - rules
+  - claude-md
+  - configuration
+  status: ready
 ---
 
 # Add Rule — Place Agent Instructions Correctly
@@ -113,7 +119,7 @@ Based on confirmed placement:
 
 - Create the file with a clear heading and the rule
 - Update root CLAUDE.md links section with a new entry including routing signal
-- Example: `- [API Conventions](docs/agents/api-conventions.md) — REST patterns, error response format, pagination`
+- Example: `- API Conventions (docs/agents/api-conventions.md) — REST patterns, error response format, pagination`
 
 **If skill:**
 
@@ -160,3 +166,23 @@ Response: "ESLint already enforces this via the `prefer-const` rule. Adding it t
 - **No duplication**: If ESLint, TypeScript, or another tool already enforces it, don't add it
 - **Routing signals matter**: When adding to docs/agents/, update the root CLAUDE.md link description so Claude knows when to follow it
 - **One level deep**: Never cross-reference between docs/agents/ files. All links go from root
+
+## Troubleshooting
+
+### Skill Does Not Trigger
+
+- Error: The skill is not selected when expected.
+- Cause: Request wording does not clearly match the description trigger conditions.
+- Solution: Rephrase with explicit domain/task keywords from the description and retry.
+
+### Guidance Conflicts With Another Skill
+
+- Error: Instructions from multiple skills conflict in one task.
+- Cause: Overlapping scope across loaded skills.
+- Solution: State which skill is authoritative for the current step and apply that workflow first.
+
+### Output Is Too Generic
+
+- Error: Result lacks concrete, actionable detail.
+- Cause: Task input omitted context, constraints, or target format.
+- Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.

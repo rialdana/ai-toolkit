@@ -1,6 +1,10 @@
 ---
 name: design-mobile
-description: "Mobile-specific visual design patterns — touch targets, gestures, and platform conventions. Use when designing mobile interfaces."
+description: Draft scaffold; incomplete and not for normal use. Mobile-specific visual
+  design patterns — touch targets, gestures, and platform conventions. Use when designing
+  mobile interfaces.
+metadata:
+  status: draft
 ---
 
 # Status

@@ -1,9 +1,16 @@
 ---
 name: promptify
-description: "Transform user requests into detailed, precise prompts for AI models. Use when users say 'promptify', 'promptify this', or explicitly request prompt engineering or improvement of their request for better AI responses."
-category: agent
-tags: [agent, prompt-engineering, clarity, specification]
-status: ready
+description: Transform user requests into detailed, precise prompts for AI models.
+  Use when users say 'promptify', 'promptify this', or explicitly request prompt engineering
+  or improvement of their request for better AI responses.
+metadata:
+  category: agent
+  tags:
+  - agent
+  - prompt-engineering
+  - clarity
+  - specification
+  status: ready
 ---
 
 # Promptify
@@ -78,3 +85,37 @@ After presenting the prompt, offer the user two options:
 - Keep the prompt concise: 0.75X to 1.5X the length of the original request
 - Do not add or invent information not present in the input
 - Do not include unnecessary complexity or verbosity
+
+## Examples
+
+### Positive Trigger
+
+User: "Promptify this: audit all skills against our findings doc."
+
+Expected behavior: Use `promptify` guidance, follow its workflow, and return actionable output.
+
+### Non-Trigger
+
+User: "Generate mock customer data in JSON format."
+
+Expected behavior: Do not prioritize `promptify`; choose a more relevant skill or proceed without it.
+
+## Troubleshooting
+
+### Skill Does Not Trigger
+
+- Error: The skill is not selected when expected.
+- Cause: Request wording does not clearly match the description trigger conditions.
+- Solution: Rephrase with explicit domain/task keywords from the description and retry.
+
+### Guidance Conflicts With Another Skill
+
+- Error: Instructions from multiple skills conflict in one task.
+- Cause: Overlapping scope across loaded skills.
+- Solution: State which skill is authoritative for the current step and apply that workflow first.
+
+### Output Is Too Generic
+
+- Error: Result lacks concrete, actionable detail.
+- Cause: Task input omitted context, constraints, or target format.
+- Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.

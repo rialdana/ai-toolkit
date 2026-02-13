@@ -1,15 +1,21 @@
 ---
 name: agent-init-deep
-description: >
-  Initialize or migrate to nested CLAUDE.md structure for progressive disclosure.
-  Claude auto-loads CLAUDE.md from any directory it enters, so nested files get
-  discovered automatically. Use when setting up a new project's agent config,
-  refactoring a bloated CLAUDE.md, or adding progressive disclosure to an existing repo.
-  Triggers on: '/agent-init-deep', 'setup progressive disclosure', 'refactor claude.md',
-  'split claude.md', 'claude.md is too big'.
-category: agent
-tags: [agent, claude-md, progressive-disclosure, setup]
-status: ready
+description: 'Initialize or migrate to nested CLAUDE.md structure for progressive
+  disclosure. Claude auto-loads CLAUDE.md from any directory it enters, so nested
+  files get discovered automatically. Use when setting up a new project''s agent config,
+  refactoring a bloated CLAUDE.md, or adding progressive disclosure to an existing
+  repo. Triggers on: ''/agent-init-deep'', ''setup progressive disclosure'', ''refactor
+  claude.md'', ''split claude.md'', ''claude.md is too big''.
+
+  '
+metadata:
+  category: agent
+  tags:
+  - agent
+  - claude-md
+  - progressive-disclosure
+  - setup
+  status: ready
 ---
 
 # Init Deep — Progressive Disclosure CLAUDE.md
@@ -156,7 +162,7 @@ Plan → Execute → Validate → Commit
 
 When working on tasks involving these topics, read the linked doc:
 
-- [Topic](docs/agents/file.md) — brief routing signal describing when to read this
+- Topic (`docs/agents/file.md`) — brief routing signal describing when to read this
 - Run `/skills` to see available patterns and workflows
 ```
 
@@ -178,3 +184,37 @@ When deciding what stays in root vs moves to docs/agents/:
 - **Routing signals**: Each link description helps Claude decide whether to follow it. Be specific: "pnpm conventions, ESLint config" not just "tooling".
 - **One level deep**: All docs link from root. No cross-references between docs/agents/ files.
 - **docs/agents/ not docs/**: The `agents/` subdirectory separates agent instructions from human documentation.
+
+## Examples
+
+### Positive Trigger
+
+User: "Refactor our bloated CLAUDE.md into progressive disclosure with docs/agents."
+
+Expected behavior: Use `agent-init-deep` guidance, follow its workflow, and return actionable output.
+
+### Non-Trigger
+
+User: "Review this React component for unnecessary re-renders."
+
+Expected behavior: Do not prioritize `agent-init-deep`; choose a more relevant skill or proceed without it.
+
+## Troubleshooting
+
+### Skill Does Not Trigger
+
+- Error: The skill is not selected when expected.
+- Cause: Request wording does not clearly match the description trigger conditions.
+- Solution: Rephrase with explicit domain/task keywords from the description and retry.
+
+### Guidance Conflicts With Another Skill
+
+- Error: Instructions from multiple skills conflict in one task.
+- Cause: Overlapping scope across loaded skills.
+- Solution: State which skill is authoritative for the current step and apply that workflow first.
+
+### Output Is Too Generic
+
+- Error: Result lacks concrete, actionable detail.
+- Cause: Task input omitted context, constraints, or target format.
+- Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.

@@ -1,10 +1,17 @@
 ---
 name: agent-skill-creator
-description: "Guide for creating effective skills. Use when creating a new skill or updating an existing skill that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations."
-category: agent
-tags: [agent, skills, authoring, templates]
-status: ready
+description: Guide for creating effective skills. Use when creating a new skill or
+  updating an existing skill that extends Claude's capabilities with specialized knowledge,
+  workflows, or tool integrations.
 license: Complete terms in LICENSE.txt
+metadata:
+  category: agent
+  tags:
+  - agent
+  - skills
+  - authoring
+  - templates
+  status: ready
 ---
 
 # Skill Creator
@@ -140,9 +147,9 @@ Extract text with pdfplumber:
 
 ## Advanced features
 
-- **Form filling**: See [FORMS.md](FORMS.md) for complete guide
-- **API reference**: See [REFERENCE.md](REFERENCE.md) for all methods
-- **Examples**: See [EXAMPLES.md](EXAMPLES.md) for common patterns
+- **Form filling**: See `FORMS.md` for complete guide
+- **API reference**: See `REFERENCE.md` for all methods
+- **Examples**: See `EXAMPLES.md` for common patterns
 ```
 
 Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
@@ -185,14 +192,14 @@ Show basic content, link to advanced content:
 
 ## Creating documents
 
-Use docx-js for new documents. See [DOCX-JS.md](DOCX-JS.md).
+Use docx-js for new documents. See `DOCX-JS.md`.
 
 ## Editing documents
 
 For simple edits, modify the XML directly.
 
-**For tracked changes**: See [REDLINING.md](REDLINING.md)
-**For OOXML details**: See [OOXML.md](OOXML.md)
+**For tracked changes**: See `REDLINING.md`
+**For OOXML details**: See `OOXML.md`
 ```
 
 Claude reads REDLINING.md or OOXML.md only when the user needs those features.
@@ -356,3 +363,37 @@ After testing the skill, users may request improvements. Often this happens righ
 2. Notice struggles or inefficiencies
 3. Identify how SKILL.md or bundled resources should be updated
 4. Implement changes and test again
+
+## Examples
+
+### Positive Trigger
+
+User: "Create a new skill for converting PDFs to markdown with reusable scripts."
+
+Expected behavior: Use `agent-skill-creator` guidance, follow its workflow, and return actionable output.
+
+### Non-Trigger
+
+User: "Find and fix a TypeScript type error in src/api/client.ts."
+
+Expected behavior: Do not prioritize `agent-skill-creator`; choose a more relevant skill or proceed without it.
+
+## Troubleshooting
+
+### Skill Does Not Trigger
+
+- Error: The skill is not selected when expected.
+- Cause: Request wording does not clearly match the description trigger conditions.
+- Solution: Rephrase with explicit domain/task keywords from the description and retry.
+
+### Guidance Conflicts With Another Skill
+
+- Error: Instructions from multiple skills conflict in one task.
+- Cause: Overlapping scope across loaded skills.
+- Solution: State which skill is authoritative for the current step and apply that workflow first.
+
+### Output Is Too Generic
+
+- Error: Result lacks concrete, actionable detail.
+- Cause: Task input omitted context, constraints, or target format.
+- Solution: Add specific constraints (environment, scope, format, success criteria) and rerun.

@@ -104,7 +104,9 @@ skills/[skill-name]/
 ├── rules/                # Rule files (optional)
 │   ├── _sections.md      # Section definitions
 │   └── [prefix]-*.md     # Individual rules
-└── README.md             # Human-readable docs (optional)
+├── references/           # Long-form guidance loaded on demand (optional)
+├── scripts/              # Executable helpers for deterministic tasks (optional)
+└── assets/               # Templates/resources used in outputs (optional)
 ```
 
 ### Rule File Format
