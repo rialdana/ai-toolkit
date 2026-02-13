@@ -29,6 +29,18 @@ Skills use a **layered architecture**: generic platform rules + specific framewo
 | Database | `platform-database` | `tech-drizzle` |
 | Testing | `platform-testing` | `tech-vitest` |
 
+## Skill Composition Matrix
+
+Use this table to combine skills intentionally and avoid overlap conflicts:
+
+| Task Type | Primary Skill | Add Secondary Skill When | Priority Rule |
+|-----------|---------------|--------------------------|---------------|
+| Frontend architecture/state/data flow | `platform-frontend` | `tech-react` only for React hook/effect/render details | Architecture decisions from `platform-frontend` win |
+| Visual UI implementation | `design-frontend` | `design-accessibility` for all production UI reviews | Accessibility requirements win over visual preferences |
+| API/service design | `platform-backend` | `tech-trpc` when tRPC procedures/routers are in scope | Security/validation rules from `platform-backend` win |
+| Testing strategy | `platform-testing` | `tech-vitest` when Vitest APIs (vi.mock/fake timers) are required | Test boundary decisions from `platform-testing` win |
+| SQL schema/migrations | `platform-database` | `tech-drizzle` for Drizzle-specific patterns | Data safety/migration rules from `platform-database` win |
+
 ---
 
 ## Skills

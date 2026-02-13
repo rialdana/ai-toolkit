@@ -18,6 +18,16 @@ metadata:
 
 Expert guidance on Swift Concurrency best practices covering async/await, actors, tasks, Sendable, threading, memory management, testing, and migration strategies.
 
+## Rules
+
+Core Swift Concurrency rules extracted as discrete, high-impact patterns. See [rules index](rules/_sections.md) for the full list organized by:
+
+- **Async/Await Patterns** - Never add dummy suspension points to silence warnings
+- **Actor Isolation** - Use actors for data-race safety with compiler verification
+- **Task Lifecycle** - Understand task cancellation and structured concurrency
+- **Sendable Conformance** - Require Sendable for crossing concurrency boundaries
+- **Testing** - Patterns for testing async concurrent code without flaky tests
+
 ## References
 
 See [references/swift-concurrency.md](references/swift-concurrency.md) for comprehensive guidance organized by:

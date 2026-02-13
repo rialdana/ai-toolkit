@@ -18,6 +18,19 @@ metadata:
 
 Modern CLI design patterns for commands, flags, output, errors, signals, config, and distribution.
 
+## Rules
+
+Core CLI design rules extracted as discrete, actionable patterns. See [rules index](rules/_sections.md) for the full list organized by:
+
+- **Commands & Naming** - Lowercase, typeable command names
+- **Flags & Arguments** - Standard flag conventions (-h, -v, -q, etc.)
+- **Configuration** - Precedence order (flags > env > config > defaults)
+- **Output & Streams** - stdout vs stderr separation
+- **Error Handling** - Actionable error messages with clear fixes
+- **Signals & Lifecycle** - Ctrl-C handling with timeout and force option
+- **Security** - Never read secrets from environment variables
+- **Distribution** - Single binary packaging when possible
+
 ## References
 
 See [references/cli-patterns.md](references/cli-patterns.md) for comprehensive guidance organized by:
