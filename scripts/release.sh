@@ -43,11 +43,6 @@ if [[ -n "$SET_BUILD" && ! "$SET_BUILD" =~ ^[1-9][0-9]*$ ]]; then
   error "Build must be a positive integer (e.g., 1, 2, 3)"
 fi
 
-# Check if tag already exists
-if git rev-parse "$TAG" >/dev/null 2>&1; then
-  error "Tag $TAG already exists"
-fi
-
 # Check for uncommitted changes
 if [[ -n $(git status --porcelain) ]]; then
   error "Working directory has uncommitted changes. Commit or stash them first."
@@ -66,13 +61,24 @@ fi
 
 info "Releasing build for $SKILL_NAME..."
 
-# Step 1: Validate skills
+# Step 1: Validate skills and marketplace entry
 info "Running skills audit..."
 if ! ruby scripts/skills_audit.rb; then
   error "Skills audit failed. Fix issues before releasing."
 fi
 success "Skills audit passed"
 
+info "Validating marketplace.json entry..."
+SKILL_NAME="$SKILL_NAME" ruby -e "
+require 'json'
+skill = ENV.fetch('SKILL_NAME')
+marketplace = JSON.parse(File.read('marketplace.json'))
+entry = marketplace['skills']&.find { |s| s['name'] == skill }
+abort \"Skill #{skill} missing from marketplace.json\" unless entry
+"
+success "Found $SKILL_NAME in marketplace.json"
+
+# Step 2: Bump build
 info "Updating build id in $SKILL_PATH..."
 NEW_BUILD=$(SKILL_PATH="$SKILL_PATH" SET_BUILD="$SET_BUILD" ruby -e "
 require 'yaml'
@@ -111,31 +117,30 @@ skill = ENV.fetch('SKILL_NAME')
 build = Integer(ENV.fetch('NEW_BUILD'))
 marketplace = JSON.parse(File.read('marketplace.json'))
 entry = marketplace['skills']&.find { |s| s['name'] == skill }
-abort \"Skill #{skill} missing from marketplace.json\" unless entry
+abort \"Skill #{skill} missing from marketplace.json (should not happen)\" unless entry
 entry['version'] = build
 File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
 "
 success "Updated marketplace.json for $SKILL_NAME"
 
-info "Running skills audit..."
-if ! ruby scripts/skills_audit.rb; then
-  error "Skills audit failed. Fix issues before releasing."
+# Step 4: Check tag doesn't already exist
+TAG="skill-${SKILL_NAME}-b${NEW_BUILD}"
+if git rev-parse "$TAG" >/dev/null 2>&1; then
+  error "Tag $TAG already exists"
 fi
-success "Skills audit passed"
 
-# Step 3: Commit build bump
+# Step 5: Commit build bump
 info "Committing build bump..."
 git add "$SKILL_PATH" marketplace.json
 git commit -m "chore(${SKILL_NAME}): bump build to ${NEW_BUILD}"
 success "Created commit"
 
-# Step 4: Create annotated tag
-TAG="skill-${SKILL_NAME}-b${NEW_BUILD}"
+# Step 6: Create annotated tag
 info "Creating annotated tag $TAG..."
 git tag -a "$TAG" -m "Release ${SKILL_NAME} build ${NEW_BUILD}"
 success "Created tag $TAG"
 
-# Step 5: Ask about pushing
+# Step 7: Ask about pushing
 echo
 info "Build release prepared locally:"
 echo "  Skill: $SKILL_NAME"

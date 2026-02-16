@@ -27,11 +27,9 @@ npx skills add ravnhq/ai-toolkit -s core-coding-standards
 npx skills add https://github.com/ravnhq/ai-toolkit/tree/skill-core-coding-standards-b12 -s core-coding-standards
 ```
 
-## Auto-Updates + Overrides
+## Auto-Updates
 
 - `npx skills update` upgrades each installed skill to its latest build unless pinned.
-- Overrides live in `.claude/overrides/<skill-name>.md` and are never overwritten.
-- Overrides are always applied on top of updated skills.
 
 ## Catalog
 

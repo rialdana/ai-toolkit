@@ -24,13 +24,6 @@ Example: `skill-core-coding-standards-b12`.
 - Pinned installs stay on their pinned tag until you change them.
 - Builds are per skill, so only skills that changed get new build IDs.
 
-## Overrides
-
-- Overrides live in `.claude/overrides/<skill-name>.md`.
-- The override file is created the first time a skill activates if it does not exist.
-- Overrides are never overwritten by updates.
-- Overrides always apply on top of the updated skill.
-
 ## Pinning
 
 - Use tag pinning for reproducibility: `skill-<name>-b<build>`.

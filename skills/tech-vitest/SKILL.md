@@ -57,39 +57,3 @@ Expected behavior: Do not prioritize `tech-vitest`; choose a more relevant skill
 1. Identify whether the request clearly matches `tech-vitest` scope and triggers.
 2. Apply the skill rules and referenced guidance to produce a concrete result.
 3. Validate output quality against constraints; if gaps remain, refine once with explicit assumptions.
-
-## Project Overrides
-
-Before applying rules from this skill, check if `.claude/overrides/tech-vitest.md` exists.
-
-- **If it does not exist**: Create it from the template below, then inform the user.
-- **If it exists**: Read it and apply its instructions over the defaults in this skill.
-  Override file instructions take priority over upstream rules.
-
-### Override Template
-
-When creating the override file, use this content:
-
-    # Tech Vitest — Project Overrides
-    #
-    # This file customizes the upstream tech-vitest skill for this project.
-    # Edit freely — this file is never overwritten by skill updates.
-    #
-    # ## How to use
-    # - **Disable a rule**: "Ignore the <rule-name> rule"
-    # - **Modify a rule**: "For <rule-name>, instead do <your preference>"
-    # - **Add a rule**: Write your project-specific rule directly
-    #
-    # Leave sections empty or delete them if you have no overrides.
-
-    ## Disabled Rules
-
-    (none)
-
-    ## Modified Rules
-
-    (none)
-
-    ## Additional Project Rules
-
-    (none)
