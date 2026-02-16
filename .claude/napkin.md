@@ -28,7 +28,3 @@
 
 ## Domain Notes
 -
-## Corrections
-| Date | Source | What Went Wrong | What To Do Instead |
-|------|--------|----------------|-------------------|
-| 2026-02-13 | self | Ran ls before reading .claude/napkin.md (again) | Read .claude/napkin.md before any other command in this repo |

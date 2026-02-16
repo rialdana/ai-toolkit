@@ -99,33 +99,7 @@ jobs:
               continue
             fi
 
-            NEW_BUILD=$(SKILL_PATH="$SKILL_PATH" ruby -e "
-          require 'yaml'
-          path = ENV.fetch('SKILL_PATH')
-          content = File.read(path)
-          abort \"Missing frontmatter in #{path}\" unless content =~ /\\A---\\n(.*?)\\n---\\n/m
-          frontmatter = \$1; body = \$'
-          data = YAML.safe_load(frontmatter, permitted_classes: [Symbol]) || {}
-          data['metadata'] ||= {}
-          current = data.dig('metadata', 'version')
-          current = 0 unless current && current.to_s.match?(/\\A\\d+\\z/)
-          new_build = current.to_i + 1
-          data['metadata']['version'] = new_build
-          new_frontmatter = YAML.dump(data).sub(/\\A---\\n/, '')
-          File.write(path, \"---\\n#{new_frontmatter}---\\n#{body}\")
-          puts new_build
-          ")
-
-            SKILL_NAME="$SKILL" NEW_BUILD="$NEW_BUILD" ruby -e "
-          require 'json'
-          skill = ENV.fetch('SKILL_NAME')
-          build = Integer(ENV.fetch('NEW_BUILD'))
-          marketplace = JSON.parse(File.read('marketplace.json'))
-          entry = marketplace['skills']&.find { |s| s['name'] == skill }
-          abort \"#{skill} missing from marketplace.json\" unless entry
-          entry['version'] = build
-          File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
-          "
+            NEW_BUILD=$(ruby scripts/skill_version.rb "$SKILL_PATH")
 
             TAG="skill-${SKILL}-b${NEW_BUILD}"
             TAGS="${TAGS} ${TAG}"

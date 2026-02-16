@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# frozen_string_literal: true
 #
 # Manual per-skill build release (local use only).
 # CI handles releases automatically on merge to main.
@@ -81,50 +80,14 @@ abort \"Skill #{skill} missing from marketplace.json\" unless entry
 "
 success "Found $SKILL_NAME in marketplace.json"
 
-# Step 2: Bump build
-info "Updating build id in $SKILL_PATH..."
-NEW_BUILD=$(SKILL_PATH="$SKILL_PATH" SET_BUILD="$SET_BUILD" ruby -e "
-require 'yaml'
-
-path = ENV.fetch('SKILL_PATH')
-set_build = ENV['SET_BUILD']
-content = File.read(path)
-
-unless content =~ /\\A---\\n(.*?)\\n---\\n/m
-  abort \"Missing frontmatter in #{path}\"
-end
-
-frontmatter = \$1
-body = \$'
-data = YAML.safe_load(frontmatter, permitted_classes: [Symbol]) || {}
-data['metadata'] ||= {}
-
-current = data.dig('metadata', 'version')
-unless current && current.to_s.match?(/\\A\\d+\\z/)
-  abort \"Current build id missing or invalid in #{path}\"
-end
-
-new_build = set_build ? Integer(set_build) : current.to_i + 1
-data['metadata']['version'] = new_build
-new_frontmatter = YAML.dump(data).sub(/\\A---\\n/, '')
-File.write(path, \"---\\n#{new_frontmatter}---\\n#{body}\")
-puts new_build
-")
+# Step 2: Bump build (shared script also updates marketplace.json)
+info "Bumping build in $SKILL_PATH..."
+if [[ -n "$SET_BUILD" ]]; then
+  NEW_BUILD=$(ruby scripts/skill_version.rb "$SKILL_PATH" "$SET_BUILD")
+else
+  NEW_BUILD=$(ruby scripts/skill_version.rb "$SKILL_PATH")
+fi
 success "Updated $SKILL_NAME build to $NEW_BUILD"
-
-info "Updating marketplace.json..."
-SKILL_NAME="$SKILL_NAME" NEW_BUILD="$NEW_BUILD" ruby -e "
-require 'json'
-
-skill = ENV.fetch('SKILL_NAME')
-build = Integer(ENV.fetch('NEW_BUILD'))
-marketplace = JSON.parse(File.read('marketplace.json'))
-entry = marketplace['skills']&.find { |s| s['name'] == skill }
-abort \"Skill #{skill} missing from marketplace.json (should not happen)\" unless entry
-entry['version'] = build
-File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
-"
-success "Updated marketplace.json for $SKILL_NAME"
 
 # Step 3: Check tag doesn't already exist
 TAG="skill-${SKILL_NAME}-b${NEW_BUILD}"
