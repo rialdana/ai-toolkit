@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # frozen_string_literal: true
 #
-# Per-skill build release automation for ai-toolkit
+# Manual per-skill build release (local use only).
+# CI handles releases automatically on merge to main.
+# Use this script when you need to release outside the normal PR flow.
+#
 # Usage: ./scripts/release.sh <skill-name> [build]
 # Example: ./scripts/release.sh core-coding-standards
 # Example: ./scripts/release.sh core-coding-standards 12
@@ -50,7 +53,7 @@ fi
 
 # Check if on main branch
 CURRENT_BRANCH=$(git branch --show-current)
-if [[ "$CURRENT_BRANCH" != "main" && "$CURRENT_BRANCH" != "skill-versioning" ]]; then
+if [[ "$CURRENT_BRANCH" != "main" ]]; then
   info "Warning: Not on main branch (current: $CURRENT_BRANCH)"
   read -p "Continue anyway? (y/N) " -n 1 -r
   echo

@@ -1,0 +1,119 @@
+name: Skills Release
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "skills/**"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+
+      - name: Detect changed skills
+        id: detect
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'skills/*/SKILL.md' 'skills/*/rules/' 'skills/*/references/' \
+            | grep -v '_drafts' \
+            | sed -n 's|^skills/\([^/]*\)/.*|\1|p' \
+            | sort -u \
+            | tr '\n' ' ')
+          echo "skills=${CHANGED}" >> "$GITHUB_OUTPUT"
+          if [ -z "$CHANGED" ]; then
+            echo "No active skills changed."
+          else
+            echo "Changed skills: $CHANGED"
+          fi
+
+      - name: Bump builds
+        if: steps.detect.outputs.skills != ''
+        id: bump
+        run: |
+          SKILLS="${{ steps.detect.outputs.skills }}"
+          TAGS=""
+          NAMES=""
+
+          for SKILL in $SKILLS; do
+            SKILL_PATH="skills/${SKILL}/SKILL.md"
+            if [ ! -f "$SKILL_PATH" ]; then
+              echo "::warning::Skill file not found: $SKILL_PATH"
+              continue
+            fi
+
+            NEW_BUILD=$(SKILL_PATH="$SKILL_PATH" ruby -e "
+          require 'yaml'
+          path = ENV.fetch('SKILL_PATH')
+          content = File.read(path)
+          abort \"Missing frontmatter in #{path}\" unless content =~ /\\A---\\n(.*?)\\n---\\n/m
+          frontmatter = \$1; body = \$'
+          data = YAML.safe_load(frontmatter, permitted_classes: [Symbol]) || {}
+          data['metadata'] ||= {}
+          current = data.dig('metadata', 'version')
+          abort \"Invalid version in #{path}\" unless current && current.to_s.match?(/\\A\\d+\\z/)
+          new_build = current.to_i + 1
+          data['metadata']['version'] = new_build
+          new_frontmatter = YAML.dump(data).sub(/\\A---\\n/, '')
+          File.write(path, \"---\\n#{new_frontmatter}---\\n#{body}\")
+          puts new_build
+          ")
+
+            SKILL_NAME="$SKILL" NEW_BUILD="$NEW_BUILD" ruby -e "
+          require 'json'
+          skill = ENV.fetch('SKILL_NAME')
+          build = Integer(ENV.fetch('NEW_BUILD'))
+          marketplace = JSON.parse(File.read('marketplace.json'))
+          entry = marketplace['skills']&.find { |s| s['name'] == skill }
+          abort \"#{skill} missing from marketplace.json\" unless entry
+          entry['version'] = build
+          File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
+          "
+
+            TAG="skill-${SKILL}-b${NEW_BUILD}"
+            TAGS="${TAGS} ${TAG}"
+            NAMES="${NAMES} ${SKILL}"
+            echo "Bumped ${SKILL} to build ${NEW_BUILD} (${TAG})"
+          done
+
+          echo "tags=${TAGS}" >> "$GITHUB_OUTPUT"
+          echo "names=${NAMES}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate
+        if: steps.detect.outputs.skills != ''
+        run: ruby scripts/skills_audit.rb
+
+      - name: Commit and tag
+        if: steps.detect.outputs.skills != ''
+        run: |
+          NAMES="${{ steps.bump.outputs.names }}"
+          TAGS="${{ steps.bump.outputs.tags }}"
+          TRIMMED=$(echo "$NAMES" | xargs)
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills/*/SKILL.md marketplace.json
+          git commit -m "chore: release ${TRIMMED}"
+
+          for TAG in $TAGS; do
+            SKILL=$(echo "$TAG" | sed 's/^skill-//;s/-b[0-9]*$//')
+            BUILD=$(echo "$TAG" | sed 's/.*-b//')
+            git tag -a "$TAG" -m "Release ${SKILL} build ${BUILD}"
+            echo "Tagged ${TAG}"
+          done
+
+          git push origin main
+          git push origin --tags

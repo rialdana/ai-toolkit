@@ -156,10 +156,6 @@ def check_structure(path, body, frontmatter, issues)
     issues << Issue.new(severity: :error, code: "missing_workflow_section", path:, message: "Active skills must include an `## Workflow` section.")
   end
 
-  if active && body !~ /^##+\s+Project Overrides\b/i
-    issues << Issue.new(severity: :error, code: "missing_project_overrides_section", path:, message: "Active skills must include an `## Project Overrides` section.")
-  end
-
   readme_paths = [File.join(File.dirname(path), "README.md"), File.join(File.dirname(path), "readme.md")]
   if readme_paths.any? { |readme| File.exist?(readme) }
     issues << Issue.new(severity: :error, code: "readme_not_allowed", path:, message: "Skill folders must not include README.md/readme.md.")

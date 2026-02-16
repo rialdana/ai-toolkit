@@ -52,3 +52,4 @@ See `marketplace.json` for the full catalog. Drafts live in `skills/_drafts/`.
 1. Create or edit a skill in `skills/<name>/`.
 2. Validate: `ruby scripts/skills_audit.rb` and `ruby scripts/skills_harness.rb`.
 3. Update `marketplace.json` if you add or rename skills.
+4. Open a PR to `main`. Builds are bumped and tagged automatically on merge.

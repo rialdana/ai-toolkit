@@ -29,6 +29,18 @@ Example: `skill-core-coding-standards-b12`.
 - Use tag pinning for reproducibility: `skill-<name>-b<build>`.
 - Pin when you need stable behavior, then upgrade intentionally.
 
+## CI Release
+
+Releases are automated via GitHub Actions (`.github/workflows/skills-release.yml`).
+
+When a push to `main` changes files under `skills/*/`:
+
+1. CI detects which skills changed.
+2. For each changed skill, increments `metadata.version` in SKILL.md and `marketplace.json`.
+3. Commits the bump, creates per-skill tags (`skill-<name>-b<build>`), and pushes.
+
+Contributors do not need to bump versions or create tags. `scripts/release.sh` is available for manual releases outside the normal PR flow.
+
 ## Marketplace
 
 `marketplace.json` only tracks per-skill build IDs. It does not contain a global version field.
