@@ -11,7 +11,7 @@ metadata:
   - aria
   - a11y
   status: ready
-  version: 1
+  version: 2
 ---
 
 # Principles

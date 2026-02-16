@@ -11,7 +11,7 @@ metadata:
   - mocking
   - web
   status: ready
-  version: 1
+  version: 2
 ---
 
 # Rules

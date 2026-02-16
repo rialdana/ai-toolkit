@@ -9,7 +9,7 @@ metadata:
   - review
   - fundamentals
   status: ready
-  version: 1
+  version: 2
 ---
 
 # Principles
