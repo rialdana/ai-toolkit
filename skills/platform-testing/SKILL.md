@@ -10,6 +10,7 @@ metadata:
   - mocking
   - test-design
   status: ready
+  version: 1
 ---
 
 # Principles

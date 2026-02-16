@@ -16,6 +16,7 @@ metadata:
   - progressive-disclosure
   - setup
   status: ready
+  version: 1
 ---
 
 # Init Deep — Progressive Disclosure CLAUDE.md

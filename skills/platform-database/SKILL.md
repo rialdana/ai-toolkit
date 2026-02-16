@@ -12,6 +12,7 @@ metadata:
   - migrations
   - performance
   status: ready
+  version: 1
 ---
 
 # Principles

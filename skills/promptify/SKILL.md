@@ -11,6 +11,7 @@ metadata:
   - clarity
   - specification
   status: ready
+  version: 1
 ---
 
 # Promptify

@@ -12,6 +12,7 @@ metadata:
   - database
   - web
   status: ready
+  version: 1
 ---
 
 # Rules

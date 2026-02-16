@@ -12,6 +12,7 @@ metadata:
   - authoring
   - templates
   status: ready
+  version: 1
 ---
 
 # Skill Creator
