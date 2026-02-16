@@ -40,6 +40,50 @@ jobs:
             echo "Changed skills: $CHANGED"
           fi
 
+      - name: Sync marketplace.json
+        if: steps.detect.outputs.skills != ''
+        run: |
+          ruby -e "
+          require 'yaml'
+          require 'json'
+
+          marketplace = JSON.parse(File.read('marketplace.json'))
+          skills = marketplace['skills'] ||= []
+          index = skills.each_with_object({}) { |s, h| h[s['name']] = s }
+
+          # Add missing entries for active skills
+          Dir.glob('skills/*/SKILL.md').reject { |f| f.include?('_drafts') }.each do |path|
+            content = File.read(path)
+            next unless content =~ /\\A---\\n(.*?)\\n---\\n/m
+            data = YAML.safe_load(\$1, permitted_classes: [Symbol]) || {}
+            name = data['name']
+            next unless name
+
+            unless index[name]
+              meta = data['metadata'] || {}
+              entry = {
+                'name' => name,
+                'source' => \"./skills/#{name}\",
+                'description' => data['description'].to_s,
+                'category' => meta['category'] || 'universal',
+                'tags' => meta['tags'] || [],
+                'status' => meta['status'] || 'ready',
+                'version' => meta['version'] || 1
+              }
+              skills << entry
+              puts \"Added #{name} to marketplace.json\"
+            end
+          end
+
+          # Remove entries for deleted skills
+          active = Dir.glob('skills/*/SKILL.md').reject { |f| f.include?('_drafts') }.map { |f| File.basename(File.dirname(f)) }
+          removed = skills.reject { |s| active.include?(s['name']) }
+          removed.each { |s| puts \"Removed #{s['name']} from marketplace.json\" }
+          skills.reject! { |s| !active.include?(s['name']) }
+
+          File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
+          "
+
       - name: Bump builds
         if: steps.detect.outputs.skills != ''
         id: bump
@@ -64,7 +108,7 @@ jobs:
           data = YAML.safe_load(frontmatter, permitted_classes: [Symbol]) || {}
           data['metadata'] ||= {}
           current = data.dig('metadata', 'version')
-          abort \"Invalid version in #{path}\" unless current && current.to_s.match?(/\\A\\d+\\z/)
+          current = 0 unless current && current.to_s.match?(/\\A\\d+\\z/)
           new_build = current.to_i + 1
           data['metadata']['version'] = new_build
           new_frontmatter = YAML.dump(data).sub(/\\A---\\n/, '')

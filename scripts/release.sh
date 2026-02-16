@@ -126,24 +126,24 @@ File.write('marketplace.json', JSON.pretty_generate(marketplace) + \"\\n\")
 "
 success "Updated marketplace.json for $SKILL_NAME"
 
-# Step 4: Check tag doesn't already exist
+# Step 3: Check tag doesn't already exist
 TAG="skill-${SKILL_NAME}-b${NEW_BUILD}"
 if git rev-parse "$TAG" >/dev/null 2>&1; then
   error "Tag $TAG already exists"
 fi
 
-# Step 5: Commit build bump
+# Step 4: Commit build bump
 info "Committing build bump..."
 git add "$SKILL_PATH" marketplace.json
 git commit -m "chore(${SKILL_NAME}): bump build to ${NEW_BUILD}"
 success "Created commit"
 
-# Step 6: Create annotated tag
+# Step 5: Create annotated tag
 info "Creating annotated tag $TAG..."
 git tag -a "$TAG" -m "Release ${SKILL_NAME} build ${NEW_BUILD}"
 success "Created tag $TAG"
 
-# Step 7: Ask about pushing
+# Step 6: Ask about pushing
 echo
 info "Build release prepared locally:"
 echo "  Skill: $SKILL_NAME"

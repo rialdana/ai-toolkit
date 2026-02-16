@@ -123,7 +123,7 @@ def check_metadata(path, frontmatter, issues)
   return unless active
 
   unless metadata.is_a?(Hash)
-    issues << Issue.new(severity: :error, code: "missing_metadata", path:, message: "Metadata must include `version` build id.")
+    issues << Issue.new(severity: :warn, code: "missing_metadata", path:, message: "Missing `metadata.version` — CI will bootstrap to build 1 on merge.")
     return
   end
 
@@ -133,7 +133,7 @@ def check_metadata(path, frontmatter, issues)
       issues << Issue.new(severity: :error, code: "invalid_version_format", path:, message: "Version `#{version}` must be a positive integer build id (e.g., 1, 2, 3).")
     end
   else
-    issues << Issue.new(severity: :error, code: "missing_version", path:, message: "Metadata must include `version` build id.")
+    issues << Issue.new(severity: :warn, code: "missing_version", path:, message: "Missing `metadata.version` — CI will bootstrap to build 1 on merge.")
   end
 end
 
@@ -197,7 +197,11 @@ def check_version_consistency(skill_data, issues)
   skill_data.each do |path, frontmatter|
     name = frontmatter["name"]
     version = frontmatter.dig("metadata", "version")
-    next unless name && version
+    next unless name
+
+    # Skills without a version are not checked for consistency —
+    # CI will bootstrap the version on merge.
+    next unless version
 
     skill_versions[name] = { version:, path: }
   end
