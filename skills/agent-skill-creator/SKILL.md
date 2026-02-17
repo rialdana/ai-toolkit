@@ -133,6 +133,7 @@ Create the skill folder and write its contents.
    - **Frontmatter**: Follow `references/description-authoring.md` for the description formula
    - **Body**: Use imperative/infinitive form. Structure by workflow steps or task categories.
    - Keep the body lean — point to references for depth
+   - Validate against `references/validation-checklist.md` to ensure the skill meets all structural requirements
 
 4. **Delete unused scaffolding** — remove example files and empty directories.
 
@@ -184,6 +185,7 @@ Consult these based on the skill's needs:
 - **Workflow patterns**: `references/workflows.md` — sequential, multi-service, iterative, context-aware, domain intelligence
 - **Output patterns**: `references/output-patterns.md` — templates and example-based output guidance
 - **Testing and iteration**: `references/testing-iteration.md` — triggering tests, functional tests, performance metrics, diagnostics
+- **Validation checklist**: `references/validation-checklist.md` — structural requirements every skill must meet
 - **Troubleshooting**: `references/troubleshooting.md` — common failures and resolution paths
 
 ## Examples
