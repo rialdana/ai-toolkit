@@ -1,23 +1,22 @@
 ---
 name: agent-skill-creator
-description: >-
-  Guide for creating effective, portable skills that extend Claude's capabilities
-  with specialized knowledge, workflows, and tool integrations. Use when:
+description: 'Guide for creating effective, portable skills that extend Claude''s
+  capabilities with specialized knowledge, workflows, and tool integrations. Use when:
   (1) Creating a new skill from scratch, (2) Updating or improving an existing skill,
   (3) Structuring skill content for progressive disclosure, (4) Writing skill descriptions
   and triggers, (5) Packaging a skill for distribution. Triggers on: "create a skill",
   "build a skill", "new skill", "update this skill", "improve skill description",
-  "skill structure", "skill triggers".
+  "skill structure", "skill triggers".'
 license: Complete terms in LICENSE.txt
 metadata:
   category: agent
   tags:
-    - agent
-    - skills
-    - authoring
-    - templates
+  - agent
+  - skills
+  - authoring
+  - templates
   status: ready
-  version: 3
+  version: 4
 ---
 
 # Skill Creator
