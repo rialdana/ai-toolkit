@@ -12,7 +12,7 @@ metadata:
   - rpc
   - web
   status: ready
-  version: 2
+  version: 3
 ---
 
 # Rules

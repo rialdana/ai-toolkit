@@ -15,7 +15,7 @@ metadata:
   - claude-md
   - configuration
   status: ready
-  version: 2
+  version: 3
 ---
 
 # Add Rule — Place Agent Instructions Correctly

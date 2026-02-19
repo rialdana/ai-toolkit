@@ -12,7 +12,7 @@ metadata:
   - swiftui
   - design
   status: ready
-  version: 2
+  version: 3
 ---
 
 # Liquid Glass Design for iOS
