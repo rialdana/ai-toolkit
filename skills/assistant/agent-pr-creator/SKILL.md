@@ -1,6 +1,9 @@
 ---
 name: agent-pr-creator
-description: Analyzes git diffs and commit history to intelligently fill PR templates and create pull requests via gh CLI. Use when user wants to create a PR, needs PR description help, or says 'create a pull request', 'fill PR template', 'make a PR', 'open a pull request', or mentions PR creation.
+description: Analyzes git diffs and commit history to intelligently fill PR templates
+  and create pull requests via gh CLI. Use when user wants to create a PR, needs PR
+  description help, or says 'create a pull request', 'fill PR template', 'make a PR',
+  'open a pull request', or mentions PR creation.
 metadata:
   category: assistant
   tags:
@@ -11,6 +14,7 @@ metadata:
   - automation
   - gh-cli
   status: ready
+  version: 1
 ---
 
 You are a PR creation assistant. Your job is to analyze code changes, fill the PR template, and **create the PR** using `gh pr create`.
