@@ -1,0 +1,38 @@
+name: Skills Quality
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - "scripts/**"
+      - ".github/workflows/skills-quality.yml"
+      - "README.md"
+      - "marketplace.json"
+  push:
+    branches: ["main"]
+    paths:
+      - "skills/**"
+      - "scripts/**"
+      - ".github/workflows/skills-quality.yml"
+      - "README.md"
+      - "marketplace.json"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+
+      - name: Run skills audit
+        run: ruby scripts/skills_audit.rb
+
+      - name: Run trigger/functional/performance harness
+        run: ruby scripts/skills_harness.rb

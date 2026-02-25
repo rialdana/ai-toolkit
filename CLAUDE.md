@@ -4,43 +4,76 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Identity
 
-A marketplace of modular Claude Code plugins for LLM-assisted development. Provides layered architecture: generic platform rules + framework-specific patterns for frontend, backend, database, mobile, testing, and design.
+A marketplace of modular AI skills for LLM-assisted development. Provides layered architecture: generic platform rules + framework-specific patterns for frontend, backend, database, testing, and design.
 
 ## Tech Stack
 
-- Plugin System: Vercel agent-skills pattern
+- Skill System: Vercel agent-skills pattern
 - Documentation: Markdown with YAML frontmatter
-- Standards: Reference material in `reference/standards/`
-- Structure: Each plugin in `plugins/[name]/` with `.claude-plugin/plugin.json` manifest
+- Structure: Each skill in `skills/[category]/[name]/` with `SKILL.md` manifest
+- Catalog: `marketplace.json` - machine-readable registry of all skills
 
 ## Tooling
 
 - MUST use `fd` and `rg` for faster file operations (over `find` and `grep`)
 - Use git for version control
 
-## Plugin Architecture
+## Commands
 
-Plugins follow a **layered hierarchy**:
-1. **Universal** (`core`, `lang-typescript`) - apply to all code
-2. **Platform Generic** (`platform-frontend`, `platform-backend`, `platform-database`, `platform-mobile`, `platform-testing`) - generic patterns
-3. **Framework-Specific** (`tech-react`, `tech-trpc`, `tech-drizzle`, etc.) - extend platform plugins with framework APIs
-4. **Design** (`design`, `design-frontend`, `design-mobile`, `design-accessibility`) - visual and UX patterns
+```bash
+ruby scripts/skills_audit.rb                    # Validate all skills (frontmatter, structure, marketplace sync)
+ruby scripts/skills_harness.rb                   # Run skill test harness
+ruby scripts/skill_version.rb <SKILL.md> [build] # Bump skill build number
+```
 
-### Plugin Structure
+Releases happen automatically via CI on merge to main. For manual releases outside the PR flow: `bash scripts/release.sh <skill-name>`
+
+## Skill Architecture
+
+Skills are organized into **category subdirectories** matching their tier:
 
 ```
-plugins/[name]/
-├── .claude-plugin/
-│   └── plugin.json              # Manifest (name, description, version, author)
-└── skills/
-    └── [skill-name]/
-        ├── rules/
-        │   ├── _sections.md     # Section definitions + impact levels
-        │   ├── _template.md     # Template for new rules
-        │   └── [prefix]-*.md    # Individual rules (kebab-case)
-        ├── metadata.json        # Version, author, references
-        └── SKILL.md             # Skill documentation
+skills/
+├── universal/     # core-coding-standards, lang-typescript
+├── platform/      # platform-frontend, platform-backend, platform-database, platform-testing, platform-cli
+├── framework/     # tech-react, tech-trpc, tech-drizzle, tech-vitest, swift-concurrency
+├── design/        # design-frontend, design-accessibility, liquid-glass-ios
+├── assistant/     # agent-add-rule, agent-init-deep, agent-skill-creator, promptify
+└── _drafts/       # scaffold skills (in development), also categorized
 ```
+
+**Hierarchy**:
+1. **Universal** - apply to all code
+2. **Platform** - generic patterns (frontend, backend, database, testing, cli)
+3. **Framework** - extend platform skills with specific framework APIs
+4. **Design** - visual and UX patterns
+5. **Assistant** - agent workflow tools
+
+### Skill Structure
+
+```
+skills/[category]/[name]/
+├── SKILL.md              # Manifest with YAML frontmatter (name, description, category, tags, status)
+├── rules/                # Rule files (optional)
+│   ├── _sections.md      # Section definitions + impact levels
+│   └── [prefix]-*.md     # Individual rules (kebab-case)
+├── references/           # Reference docs loaded on demand (optional)
+├── scripts/              # Executable helpers (optional)
+└── assets/               # Templates, images, fonts for output (optional)
+```
+
+### SKILL.md Frontmatter
+
+Every SKILL.md MUST have:
+- `name` - kebab-case skill identifier
+- `description` - what it does + trigger phrases for auto-invocation
+
+Required inside `metadata`:
+- `category` - one of: universal, platform, framework, design, assistant
+- `tags` - array of keywords for discoverability
+- `status` - ready or scaffold
+
+Optional: `license`, `metadata.version`
 
 ### Rule File Format
 
@@ -58,16 +91,17 @@ Every rule MUST have:
 
 ## Guardrails
 
-- MUST follow plugin structure conventions (Vercel pattern)
+- MUST follow skill structure conventions (Vercel pattern)
 - MUST include impact levels in rule frontmatter
 - MUST provide both correct and incorrect examples
-- NEVER create duplicate rules across plugins
-- ALWAYS check if a rule belongs in generic (platform) or specific (tech) plugin
-- ALWAYS reference source material from `reference/standards/` when extracting rules
+- NEVER create duplicate rules across skills
+- ALWAYS check if a rule belongs in generic (platform) or specific (tech) skill
+- ALWAYS reference existing skills as examples when extracting new rules
+- ALWAYS update the matching entry in `marketplace.json` when bumping `version` in any SKILL.md frontmatter (same commit)
+- MUST use exact `- Error:` / `- Cause:` / `- Solution:` / `Expected behavior:` format in SKILL.md Troubleshooting and Examples sections (required by skills harness)
 
 ## More Information
 
-- Architecture: See README.md for full plugin hierarchy and stack recipes
-- Reference Standards: `reference/standards/README.md` - source material for rule extraction
-- Plugin Marketplace: `.claude-plugin/marketplace.json` - registry of all plugins
-- Static vs Dynamic Framework: `plugins/core/skills/agents-md/SKILL.md` - when to use CLAUDE.md vs skills vs docs
+- Architecture: See README.md for full skill hierarchy and stack recipes
+- Skill Catalog: `marketplace.json` - registry of all skills with categories and tags
+- Skill Design Guide: `docs/building-skills-claude-complete-guide-findings.md` - best practices from Anthropic's official guide
