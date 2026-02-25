@@ -326,7 +326,7 @@
       ],
       "extends": "platform-mobile",
       "status": "ready",
-      "rules": 35,
+      "rules": 11,
       "version": 3
     }
   ],

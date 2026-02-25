@@ -13,7 +13,7 @@ The section ID (in parentheses) is the filename prefix used to group rules.
 ## 2. Accessibility (a11y)
 
 **Impact:** HIGH
-**Description:** Content descriptions, touch targets, and semantic properties for inclusive Android UI.
+**Description:** Content descriptions, touch targets, and heading semantics for inclusive Compose UI.
 
 ## 3. Concurrency (concurrency)
 
