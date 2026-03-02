@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-03-02
+
+- Added figma-to-react-components skill. (#12)
 ## 2026-02-27
 
 - Organized skills into category subdirectories (`skills/<category>/<name>/`) matching the five-tier hierarchy: universal, platform, framework, design, assistant. (#8)
