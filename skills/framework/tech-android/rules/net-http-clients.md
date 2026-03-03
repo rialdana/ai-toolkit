@@ -1,7 +1,7 @@
 ---
 title: HTTP Clients — Retrofit, Ktor, Error Handling
 impact: HIGH
-tags: networking, retrofit, ktor, error-handling
+tags: networking, retrofit, ktor, error-handling, interceptor, auth, headers
 ---
 
 ## HTTP Clients — Retrofit, Ktor, Error Handling
@@ -111,6 +111,133 @@ class UserRepositoryImpl(private val client: HttpClient) : UserRepository {
     }
 }
 ```
+
+### Auth Interceptors, Token Refresh, and Custom Headers
+
+Centralize authentication and custom headers in interceptors (OkHttp) or plugins (Ktor). Handle 401 responses with transparent token refresh and request retry.
+
+**Incorrect:**
+
+```kotlin
+// Bad - auth logic scattered per-endpoint
+interface UserApi {
+    @GET("users/{id}")
+    suspend fun getUser(
+        @Header("Authorization") token: String,  // Repeated on every call
+        @Header("X-App-Version") version: String, // Repeated on every call
+        @Path("id") id: String
+    ): UserDto
+}
+
+// Bad - caller must remember to pass token
+class UserRepositoryImpl(
+    private val api: UserApi,
+    private val prefs: SharedPreferences
+) : UserRepository {
+    override suspend fun getUser(id: String): Result<User> {
+        val token = prefs.getString("token", "") ?: ""
+        return runCatching {
+            api.getUser("Bearer $token", BuildConfig.VERSION_NAME, id).toDomain()
+        }
+    }
+}
+```
+
+**Correct — OkHttp interceptors (Retrofit):**
+
+```kotlin
+// Good - auth interceptor attaches token to every request
+class AuthInterceptor(
+    private val tokenProvider: TokenProvider
+) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val token = tokenProvider.accessToken ?: return chain.proceed(chain.request())
+        val request = chain.request().newBuilder()
+            .header("Authorization", "Bearer $token")
+            .build()
+        return chain.proceed(request)
+    }
+}
+
+// Good - authenticator handles 401 with token refresh and retry
+class TokenAuthenticator(
+    private val tokenProvider: TokenProvider
+) : Authenticator {
+    override fun authenticate(route: Route?, response: Response): Request? {
+        // Avoid infinite retry loops
+        if (response.request.header("X-Retry-Auth") != null) return null
+
+        val newToken = runBlocking { tokenProvider.refreshToken() } ?: return null
+        return response.request.newBuilder()
+            .header("Authorization", "Bearer $newToken")
+            .header("X-Retry-Auth", "true")
+            .build()
+    }
+}
+
+// Good - custom headers interceptor for app-wide metadata
+class AppHeadersInterceptor(
+    private val appVersion: String,
+    private val deviceId: () -> String
+) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request().newBuilder()
+            .header("X-App-Version", appVersion)
+            .header("X-Device-Id", deviceId())
+            .header("X-Platform", "Android")
+            .build()
+        return chain.proceed(request)
+    }
+}
+
+// Good - wire everything into OkHttpClient
+val okHttpClient = OkHttpClient.Builder()
+    .addInterceptor(AppHeadersInterceptor(BuildConfig.VERSION_NAME, deviceIdProvider::get))
+    .addInterceptor(AuthInterceptor(tokenProvider))
+    .authenticator(TokenAuthenticator(tokenProvider))  // Handles 401 retry
+    .addInterceptor(loggingInterceptor)                // Logging last to capture final headers
+    .build()
+```
+
+**Correct — Ktor plugin equivalent:**
+
+```kotlin
+val client = HttpClient(OkHttp) {
+    install(ContentNegotiation) {
+        json(Json { ignoreUnknownKeys = true })
+    }
+
+    // Custom headers on every request
+    install(DefaultRequest) {
+        url("https://api.example.com/")
+        header("X-App-Version", BuildConfig.VERSION_NAME)
+        header("X-Platform", "Android")
+    }
+
+    // Auth with automatic 401 refresh
+    install(Auth) {
+        bearer {
+            loadTokens {
+                val access = tokenProvider.accessToken ?: ""
+                val refresh = tokenProvider.refreshTokenString ?: ""
+                BearerTokens(access, refresh)
+            }
+            refreshTokens {
+                val newToken = tokenProvider.refreshToken()
+                    ?: return@refreshTokens null
+                BearerTokens(newToken, tokenProvider.refreshTokenString ?: "")
+            }
+        }
+    }
+}
+```
+
+**Key points:**
+- **`Interceptor`** — runs on every request; use for attaching headers (auth, app metadata)
+- **`Authenticator`** — runs only on 401 responses; use for token refresh + retry
+- Add a retry guard header (`X-Retry-Auth`) to prevent infinite 401 loops
+- Ktor's `Auth` plugin with `bearer { refreshTokens {} }` handles the same flow declaratively
+- Logging interceptor should be added last so it captures the final request with all headers
 
 ### Choosing Between Retrofit and Ktor
 
