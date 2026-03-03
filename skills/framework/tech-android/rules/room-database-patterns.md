@@ -1,12 +1,12 @@
 ---
 title: Room Database — Entities, Flow Queries, Migrations
 impact: HIGH
-tags: room, database, entities, flow, migration
+tags: room, database, entities, flow, suspend, migration
 ---
 
 ## Room Database — Entities, Flow Queries, Migrations
 
-Design entities with non-null defaults, return `Flow` from read queries for reactivity, and always use versioned migrations in production.
+Design entities with non-null defaults, choose `Flow` for reactive reads or `suspend` for one-shot reads, and always use versioned migrations in production.
 
 ### Entity Design
 
@@ -61,27 +61,27 @@ class Converters {
 }
 ```
 
-### Flow Queries for Reactive Updates
+### DAO Query Return Types — Flow vs Suspend
 
-DAO read queries should return `Flow<T>` to automatically emit new values when the underlying table changes. Use `suspend` for write operations only.
+Use `Flow<T>` for reads the UI observes reactively. Use `suspend` for one-shot reads and all write operations — both are valid.
 
-**Incorrect:**
+**Incorrect — using suspend reads to drive reactive UI:**
 
 ```kotlin
-// Bad - suspend function requires manual re-fetching
+// Bad - suspend for a query the UI needs to stay in sync with
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM tasks WHERE is_completed = 0")
     suspend fun getActiveTasks(): List<TaskEntity>  // Stale after any write
 }
 
-// Bad - ViewModel calls DAO directly, bypassing Repository
+// Bad - manual re-fetch loop to compensate for non-reactive query
 class TaskViewModel(private val dao: TaskDao) : ViewModel() {
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
 
     fun loadTasks() {
         viewModelScope.launch {
-            _tasks.value = dao.getActiveTasks()  // Must call again after every insert/update
+            _tasks.value = dao.getActiveTasks()  // Must call again after every write
         }
     }
 
@@ -94,19 +94,29 @@ class TaskViewModel(private val dao: TaskDao) : ViewModel() {
 }
 ```
 
-**Correct:**
+**Correct — Flow for reactive UI, suspend for one-shot reads and writes:**
 
 ```kotlin
-// Good - Flow emits automatically on table changes
 @Dao
 interface TaskDao {
+    // Reactive — UI stays in sync automatically
     @Query("SELECT * FROM tasks WHERE is_completed = 0")
-    fun observeActiveTasks(): Flow<List<TaskEntity>>  // Not suspend — returns Flow
+    fun observeActiveTasks(): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM tasks WHERE id = :id")
     fun observeTask(id: String): Flow<TaskEntity?>
 
-    // Keep suspend for write operations
+    // One-shot suspend reads — valid for non-reactive use cases
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    suspend fun getTaskById(id: String): TaskEntity?
+
+    @Query("SELECT COUNT(*) FROM tasks WHERE is_completed = 0")
+    suspend fun countActiveTasks(): Int
+
+    @Query("SELECT EXISTS(SELECT 1 FROM tasks WHERE id = :id)")
+    suspend fun exists(id: String): Boolean
+
+    // Writes are always suspend
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(task: TaskEntity)
 
@@ -114,9 +124,10 @@ interface TaskDao {
     suspend fun markCompleted(id: String)
 }
 
-// Good - Repository wraps DAO, ViewModel depends on Repository interface
+// Repository wraps DAO, ViewModel depends on Repository interface
 interface TaskRepository {
     fun observeActiveTasks(): Flow<List<Task>>
+    suspend fun getTask(id: String): Task?
     suspend fun completeTask(id: String)
 }
 
@@ -126,12 +137,15 @@ class TaskRepositoryImpl(
     override fun observeActiveTasks(): Flow<List<Task>> =
         taskDao.observeActiveTasks().map { entities -> entities.map { it.toDomain() } }
 
+    override suspend fun getTask(id: String): Task? =
+        taskDao.getTaskById(id)?.toDomain()
+
     override suspend fun completeTask(id: String) {
         taskDao.markCompleted(id)
     }
 }
 
-// Good - ViewModel depends on Repository interface, not DAO
+// ViewModel — Flow for observed state, suspend for actions
 class TaskViewModel(
     private val taskRepository: TaskRepository
 ) : ViewModel() {
@@ -148,8 +162,12 @@ class TaskViewModel(
 ```
 
 **When to use suspend vs Flow:**
-- **`Flow<T>`** — read queries where the UI should reflect changes automatically
-- **`suspend`** — write operations (`@Insert`, `@Update`, `@Delete`) and one-shot reads
+- **`Flow<T>`** — read queries the UI observes and should auto-update (lists, detail screens)
+- **`suspend`** — write operations, plus one-shot reads like:
+  - Checking existence before insert (`exists()`)
+  - Loading data for WorkManager, export, or share
+  - Pre-populating a form on first navigation
+  - Fetching a count or aggregate for a one-time decision
 
 ### Versioned Migrations
 
